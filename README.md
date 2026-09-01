@@ -51,25 +51,25 @@ not a bulk refactoring tool and it never edits search results automatically.
 
 <img src="./docs/screenshots/search.png" alt="YURICH project search results" width="100%">
 
----
+
 
 ### Quick editor
 
 <img src="./docs/screenshots/editor.png" alt="Editing a local file in YURICH" width="100%">
 
----
+
 
 ### Preferences and saved folders
 
 <img src="./docs/screenshots/settings.png" alt="YURICH settings, recent folders, and favorites" width="100%">
 
----
+
 
 ### Project console
 
 <img src="./docs/screenshots/terminal.png" alt="YURICH project console running a local command" width="100%">
 
----
+
 
 ## Typical workflow
 
@@ -169,7 +169,5 @@ python <path-to-plugin-creator>/scripts/validate_plugin.py plugins/yurich
 
 YURICH is licensed under the [Apache License 2.0](LICENSE). You may use, modify,
 and redistribute it under the terms of that license.
-
-
 
 
