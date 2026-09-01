@@ -17,7 +17,7 @@ STRING_LIMITS = {
     "exclude": 2048,
 }
 BOOL_KEYS = {"caseSensitive", "wholeWord", "regex", "terminalOpen"}
-INTEGER_LIMITS = {"fontSize": (11, 20), "contextLines": (0, 10)}
+INTEGER_LIMITS = {"fontSize": (11, 20), "contextLines": (0, 10), "terminalHeight": (150, 2000)}
 ENUM_VALUES = {
     "theme": {"auto", "light", "dark"},
     "searchMode": {"content", "filename"},

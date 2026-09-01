@@ -18,8 +18,8 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
 .empty{padding:55px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}.empty strong{display:block;color:var(--text);margin-bottom:6px}.results{border:1px solid var(--line);border-radius:10px;overflow:hidden}.file-group+.file-group{border-top:1px solid var(--line)}.file-head{display:flex;align-items:center;gap:8px;width:100%;border:0;border-radius:0;padding:9px 12px;background:var(--soft);text-align:left}.path{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--code-font);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.count{margin-left:auto;color:var(--muted);font-size:var(--tiny-font)}.match{display:grid;grid-template-columns:52px minmax(0,1fr);cursor:pointer}.match:hover{background:var(--soft)}.line-no{padding:5px 9px;text-align:right;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--tiny-font);user-select:none}.code{padding:5px 10px;white-space:pre;overflow:hidden;text-overflow:ellipsis;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--code-font)}.code mark{background:var(--match);color:inherit;border-radius:2px}.file-result{display:flex;align-items:center;gap:9px;width:100%;padding:10px 12px;border:0;border-radius:0;text-align:left;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.file-result+.file-result{border-top:1px solid var(--line)}.file-result::before{content:"▱";color:var(--muted)}
 .editor{display:none}.editor.active{display:block}.search-view.hidden{display:none}.editor-head{display:flex;gap:9px;align-items:center;padding-bottom:10px}.editor-path{font:600 var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dirty{color:var(--danger);font-size:var(--tiny-font)}.conflict{display:none;margin-bottom:9px;padding:9px 11px;border:1px solid color-mix(in srgb,var(--danger) 45%,var(--line));background:color-mix(in srgb,var(--danger) 8%,transparent);border-radius:8px;color:var(--danger)}.conflict.show{display:flex;align-items:center;gap:10px}
 .editor-box{display:grid;grid-template-columns:auto 1fr;height:min(70vh,720px);border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--bg)}.gutter{margin:0;padding:12px 8px;min-width:44px;overflow:hidden;text-align:right;color:var(--muted);background:var(--soft);font:var(--code-font)/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;user-select:none}.source{width:100%;height:100%;resize:none;border:0;outline:0;padding:12px;overflow:auto;background:transparent;white-space:pre;tab-size:4;font:var(--code-font)/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
-.terminal-panel{min-width:0;overflow:hidden;border-top:1px solid var(--line);background:var(--panel);color:var(--text)}.terminal-panel[hidden]{display:none}.terminal-head{display:flex;align-items:center;gap:9px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel)}.terminal-title{font-weight:700}.terminal-cwd{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font:var(--tiny-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-presets{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel)}.terminal-presets button{flex:0 0 auto;padding:5px 9px;font-size:var(--tiny-font)}.package-scripts{display:flex;min-width:0;flex-wrap:wrap;gap:6px}.terminal-hint{margin-left:auto;color:var(--muted);font-size:var(--tiny-font)}.terminal-output{height:clamp(130px,22vh,220px);margin:0;padding:11px 13px;overflow:auto;background:var(--bg);color:var(--text);white-space:pre-wrap;overflow-wrap:anywhere;font:var(--code-font)/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-command-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-top:1px solid var(--line);background:var(--panel)}.terminal-prompt{color:var(--ok);font:700 var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font:var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-status{min-height:24px;padding:4px 12px 7px;color:var(--muted);font-size:var(--tiny-font)}.terminal-status.error{color:var(--danger)}.terminal-status.ok{color:var(--ok)}.terminal-active{color:var(--accent)}
-.kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 4px;font-size:calc(var(--font-size) - 4px);color:var(--muted)}@media(max-width:650px){body{padding:0}.app{height:100vh;border:0;border-radius:0}.folder-row{align-items:stretch;flex-wrap:wrap}.folder{flex-basis:100%}.saved-row{flex-wrap:wrap}.compact-select{flex:1}.search-mode,.history-select{width:auto;max-width:100px}.options{gap:8px}.glob{width:110px}.subtitle{display:none}.editor-head{flex-wrap:wrap}.terminal-cwd,.terminal-hint{display:none}.terminal-output{height:130px}.terminal-command-row{flex-wrap:wrap}.terminal-input{flex-basis:70%}}
+.terminal-panel{display:grid;grid-template-rows:7px auto auto minmax(0,1fr) auto auto;height:340px;min-width:0;min-height:0;overflow:hidden;background:var(--panel);color:var(--text)}.terminal-panel[hidden]{display:none}.terminal-resize{position:relative;height:7px;cursor:ns-resize;touch-action:none;outline:none;background:var(--panel)}.terminal-resize::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:var(--line)}.terminal-resize::after{content:"";position:absolute;top:2px;left:50%;width:42px;height:3px;border-radius:9px;background:var(--line);transform:translateX(-50%)}.terminal-resize:hover::after,.terminal-resize:focus-visible::after,.resizing-terminal .terminal-resize::after{background:var(--accent)}.resizing-terminal,.resizing-terminal *{cursor:ns-resize!important;user-select:none!important}.terminal-head{display:flex;align-items:center;gap:9px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel)}.terminal-title{font-weight:700}.terminal-cwd{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font:var(--tiny-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-presets{display:flex;max-height:86px;overflow-y:auto;flex-wrap:wrap;align-items:center;gap:6px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel)}.terminal-presets button{flex:0 0 auto;padding:5px 9px;font-size:var(--tiny-font)}.package-scripts{display:flex;min-width:0;flex-wrap:wrap;gap:6px}.terminal-hint{margin-left:auto;color:var(--muted);font-size:var(--tiny-font)}.terminal-output{min-height:0;margin:0;padding:11px 13px;overflow:auto;background:var(--bg);color:var(--text);white-space:pre-wrap;overflow-wrap:anywhere;font:var(--code-font)/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-command-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-top:1px solid var(--line);background:var(--panel)}.terminal-prompt{color:var(--ok);font:700 var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font:var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-status{min-height:24px;padding:4px 12px 7px;color:var(--muted);font-size:var(--tiny-font)}.terminal-status.error{color:var(--danger)}.terminal-status.ok{color:var(--ok)}.terminal-active{color:var(--accent)}
+.kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 4px;font-size:calc(var(--font-size) - 4px);color:var(--muted)}@media(max-width:650px){body{padding:0}.app{height:100vh;border:0;border-radius:0}.folder-row{align-items:stretch;flex-wrap:wrap}.folder{flex-basis:100%}.saved-row{flex-wrap:wrap}.compact-select{flex:1}.search-mode,.history-select{width:auto;max-width:100px}.options{gap:8px}.glob{width:110px}.subtitle{display:none}.editor-head{flex-wrap:wrap}.terminal-cwd,.terminal-hint{display:none}.terminal-command-row{flex-wrap:wrap}.terminal-input{flex-basis:70%}}
 </style>
 </head>
 <body>
@@ -118,6 +118,7 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
     </section>
   </main>
   <section id="terminalPanel" class="terminal-panel" hidden>
+    <div id="terminalResize" class="terminal-resize" role="separator" aria-label="Resize terminal" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" tabindex="0" title="Drag to resize · Double-click to reset"></div>
     <div class="terminal-head">
       <span class="terminal-title">Terminal</span>
       <span id="terminalCwd" class="terminal-cwd">Choose a project folder</span>
@@ -145,11 +146,12 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
 const $ = id => document.getElementById(id);
 const DEFAULT_EXCLUDES = "*.min.js, *.min.css, *.map";
 const CSS_INCLUDES = "*.css, *.scss, *.sass, *.less, *.vue, *.html, *.htm, *.blade.php, *.tsx, *.jsx";
+const DEFAULT_TERMINAL_HEIGHT = 340;
 const state = {
   root:"", file:"", original:"", metadata:null, line:1, busy:false,
   restored:false, persistTimer:null, matches:[], matchIndex:-1,
   searchHistory:[], recentFolders:[], favoriteFolders:[],
-  terminal:{processId:null,cursor:0,running:false,pollTimer:null,generation:0,scriptsGeneration:0,root:""}
+  terminal:{processId:null,cursor:0,running:false,pollTimer:null,generation:0,scriptsGeneration:0,height:DEFAULT_TERMINAL_HEIGHT,resize:null,root:""}
 };
 const pending = new Map();
 let requestId = 1;
@@ -264,7 +266,8 @@ function stateSnapshot() {
     searchHistory:state.searchHistory,
     recentFolders:state.recentFolders,
     favoriteFolders:state.favoriteFolders,
-    terminalOpen:!$("terminalPanel").hidden
+    terminalOpen:!$("terminalPanel").hidden,
+    terminalHeight:Math.round(state.terminal.height)
   };
 }
 
@@ -366,6 +369,7 @@ function restoreState(saved, autoSearch = false) {
   state.root = $("root").value;
   refreshSavedChoices();
   refreshTerminalRoot();
+  applyTerminalHeight(saved.terminalHeight, false);
   setTerminalOpen(saved.terminalOpen === true, false);
   if (state.root) loadPackageScripts();
   if (state.root && $("query").value && autoSearch) {
@@ -675,10 +679,63 @@ function setTerminalOpen(open, save = true) {
   $("terminalToggle").setAttribute("aria-expanded", String(open));
   $("terminalToggle").setAttribute("aria-label", open ? "Close project terminal" : "Open project terminal");
   if (open) {
+    applyTerminalHeight(state.terminal.height, false);
     refreshTerminalRoot();
     if (state.root) loadPackageScripts();
   }
   if (save) persist();
+}
+
+function terminalHeightBounds() {
+  const appHeight = document.querySelector(".app").clientHeight || window.innerHeight || 700;
+  const minimum = Math.min(220, Math.max(150, Math.floor(appHeight * 0.4)));
+  return {minimum, maximum:Math.max(minimum, Math.floor(appHeight * 0.72))};
+}
+
+function defaultTerminalHeight() {
+  const {minimum, maximum} = terminalHeightBounds();
+  return Math.min(maximum, Math.max(minimum, Math.min(DEFAULT_TERMINAL_HEIGHT, Math.round(document.querySelector(".app").clientHeight * 0.42))));
+}
+
+function applyTerminalHeight(value, save = false) {
+  const {minimum, maximum} = terminalHeightBounds();
+  const requested = Number.isFinite(Number(value)) ? Number(value) : defaultTerminalHeight();
+  const height = Math.round(Math.min(maximum, Math.max(minimum, requested)));
+  state.terminal.height = height;
+  $("terminalPanel").style.height = height + "px";
+  $("terminalResize").setAttribute("aria-valuemin", String(minimum));
+  $("terminalResize").setAttribute("aria-valuemax", String(maximum));
+  $("terminalResize").setAttribute("aria-valuenow", String(height));
+  if (save) persist();
+}
+
+function beginTerminalResize(event) {
+  if (event.button !== 0) return;
+  event.preventDefault();
+  const handle = $("terminalResize");
+  state.terminal.resize = {
+    pointerId:event.pointerId,
+    startY:event.clientY,
+    startHeight:$("terminalPanel").getBoundingClientRect().height
+  };
+  handle.setPointerCapture(event.pointerId);
+  document.body.classList.add("resizing-terminal");
+}
+
+function moveTerminalResize(event) {
+  const resize = state.terminal.resize;
+  if (!resize || resize.pointerId !== event.pointerId) return;
+  applyTerminalHeight(resize.startHeight + resize.startY - event.clientY, false);
+}
+
+function endTerminalResize(event) {
+  const resize = state.terminal.resize;
+  if (!resize || resize.pointerId !== event.pointerId) return;
+  state.terminal.resize = null;
+  document.body.classList.remove("resizing-terminal");
+  const handle = $("terminalResize");
+  if (handle.hasPointerCapture(event.pointerId)) handle.releasePointerCapture(event.pointerId);
+  persist();
 }
 
 function refreshTerminalRoot() {
@@ -879,6 +936,16 @@ $("terminalClear").onclick = () => {
 };
 $("terminalRun").onclick = runTerminalCommand;
 $("terminalStop").onclick = stopTerminalCommand;
+$("terminalResize").addEventListener("pointerdown", beginTerminalResize);
+$("terminalResize").addEventListener("pointermove", moveTerminalResize);
+$("terminalResize").addEventListener("pointerup", endTerminalResize);
+$("terminalResize").addEventListener("pointercancel", endTerminalResize);
+$("terminalResize").addEventListener("dblclick", () => applyTerminalHeight(defaultTerminalHeight(), true));
+$("terminalResize").addEventListener("keydown", event => {
+  if (!["ArrowUp", "ArrowDown"].includes(event.key)) return;
+  event.preventDefault();
+  applyTerminalHeight(state.terminal.height + (event.key === "ArrowUp" ? 20 : -20), true);
+});
 document.querySelectorAll("[data-terminal-command]").forEach(button => {
   button.onclick = () => insertTerminalCommand(button.dataset.terminalCommand);
 });
@@ -957,6 +1024,7 @@ window.addEventListener("beforeunload", event => {
   event.preventDefault();
   event.returnValue = "";
 });
+window.addEventListener("resize", () => applyTerminalHeight(state.terminal.height, false));
 
 applyFontSize(14);
 applyContextLines(2);
@@ -966,6 +1034,7 @@ refreshSavedChoices();
 updateMatchNavigation();
 setTerminalRunning(false);
 refreshTerminalRoot();
+applyTerminalHeight(undefined, false);
 setTerminalOpen(false, false);
 if (window.openai && window.openai.widgetState) restoreState(window.openai.widgetState, true);
 setTimeout(async () => {

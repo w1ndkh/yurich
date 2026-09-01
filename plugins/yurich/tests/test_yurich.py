@@ -113,13 +113,14 @@ class McpTests(unittest.TestCase):
         requests = [
             {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-06-18"}},
             {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}},
-            {"jsonrpc": "2.0", "id": 3, "method": "resources/read", "params": {"uri": "ui://yurich/main-v6.html"}},
-            {"jsonrpc": "2.0", "id": 4, "method": "resources/read", "params": {"uri": "ui://yurich/main-v5.html"}},
-            {"jsonrpc": "2.0", "id": 5, "method": "resources/read", "params": {"uri": "ui://yurich/main-v4.html"}},
-            {"jsonrpc": "2.0", "id": 6, "method": "resources/read", "params": {"uri": "ui://yurich/main-v3.html"}},
-            {"jsonrpc": "2.0", "id": 7, "method": "resources/read", "params": {"uri": "ui://yurich/main-v2.html"}},
-            {"jsonrpc": "2.0", "id": 8, "method": "resources/read", "params": {"uri": "ui://yurich/main-v1.html"}},
-            {"jsonrpc": "2.0", "id": 9, "method": "resources/read", "params": {"uri": "ui://yurich/missing.html"}},
+            {"jsonrpc": "2.0", "id": 3, "method": "resources/read", "params": {"uri": "ui://yurich/main-v7.html"}},
+            {"jsonrpc": "2.0", "id": 4, "method": "resources/read", "params": {"uri": "ui://yurich/main-v6.html"}},
+            {"jsonrpc": "2.0", "id": 5, "method": "resources/read", "params": {"uri": "ui://yurich/main-v5.html"}},
+            {"jsonrpc": "2.0", "id": 6, "method": "resources/read", "params": {"uri": "ui://yurich/main-v4.html"}},
+            {"jsonrpc": "2.0", "id": 7, "method": "resources/read", "params": {"uri": "ui://yurich/main-v3.html"}},
+            {"jsonrpc": "2.0", "id": 8, "method": "resources/read", "params": {"uri": "ui://yurich/main-v2.html"}},
+            {"jsonrpc": "2.0", "id": 9, "method": "resources/read", "params": {"uri": "ui://yurich/main-v1.html"}},
+            {"jsonrpc": "2.0", "id": 10, "method": "resources/read", "params": {"uri": "ui://yurich/missing.html"}},
         ]
         completed = subprocess.run(
             [sys.executable, str(PLUGIN_ROOT / "server" / "yurich_mcp.py")],
@@ -141,7 +142,7 @@ class McpTests(unittest.TestCase):
             },
         )
         content = replies[2]["result"]["contents"][0]
-        self.assertEqual(content["uri"], "ui://yurich/main-v6.html")
+        self.assertEqual(content["uri"], "ui://yurich/main-v7.html")
         self.assertEqual(content["mimeType"], "text/html;profile=mcp-app")
         self.assertIn('method:"tools/call"', content["text"])
         self.assertIn('requestDisplayMode("fullscreen")', content["text"])
@@ -153,24 +154,28 @@ class McpTests(unittest.TestCase):
         self.assertIn('id="findVariable"', content["text"])
         self.assertIn('id="terminalPanel"', content["text"])
         self.assertIn('id="terminalInput"', content["text"])
+        self.assertIn('id="terminalResize"', content["text"])
         self.assertNotIn('requestDisplayMode("pip")', content["text"])
         compatibility_content = replies[3]["result"]["contents"][0]
-        self.assertEqual(compatibility_content["uri"], "ui://yurich/main-v5.html")
+        self.assertEqual(compatibility_content["uri"], "ui://yurich/main-v6.html")
         self.assertEqual(compatibility_content["text"], content["text"])
         older_content = replies[4]["result"]["contents"][0]
-        self.assertEqual(older_content["uri"], "ui://yurich/main-v4.html")
+        self.assertEqual(older_content["uri"], "ui://yurich/main-v5.html")
         self.assertEqual(older_content["text"], content["text"])
         legacy_content = replies[5]["result"]["contents"][0]
-        self.assertEqual(legacy_content["uri"], "ui://yurich/main-v3.html")
+        self.assertEqual(legacy_content["uri"], "ui://yurich/main-v4.html")
         self.assertEqual(legacy_content["text"], content["text"])
         oldest_content = replies[6]["result"]["contents"][0]
-        self.assertEqual(oldest_content["uri"], "ui://yurich/main-v2.html")
+        self.assertEqual(oldest_content["uri"], "ui://yurich/main-v3.html")
         self.assertEqual(oldest_content["text"], content["text"])
         first_content = replies[7]["result"]["contents"][0]
-        self.assertEqual(first_content["uri"], "ui://yurich/main-v1.html")
+        self.assertEqual(first_content["uri"], "ui://yurich/main-v2.html")
         self.assertEqual(first_content["text"], content["text"])
-        self.assertNotIn("result", replies[8])
-        self.assertEqual(replies[8]["error"]["code"], -32000)
+        original_content = replies[8]["result"]["contents"][0]
+        self.assertEqual(original_content["uri"], "ui://yurich/main-v1.html")
+        self.assertEqual(original_content["text"], content["text"])
+        self.assertNotIn("result", replies[9])
+        self.assertEqual(replies[9]["error"]["code"], -32000)
 
 
 class StateTests(unittest.TestCase):
@@ -195,6 +200,7 @@ class StateTests(unittest.TestCase):
                     "recentFolders": [r"C:\Projects\Video", r"C:\Projects\YURICH"],
                     "favoriteFolders": [r"C:\Projects\Video"],
                     "terminalOpen": True,
+                    "terminalHeight": 410,
                 }
                 self.assertEqual(save_state({"state": saved})["status"], "success")
                 self.assertEqual(load_state({})["state"], saved)
