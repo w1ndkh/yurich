@@ -33,6 +33,9 @@ not a bulk refactoring tool and it never edits search results automatically.
   folders, filters, context size, theme, and preferred editor font size.
 - **Flexible layout** that can remain inside the task or open in the Codex side
   panel.
+- **Project console** for running commands in the selected folder, with live
+  output, one-click `npm run build` / `npm run dev` presets, buttons for other
+  `package.json` scripts, and Stop / `Ctrl+C` support.
 
 ## Typical workflow
 
@@ -42,6 +45,8 @@ not a bulk refactoring tool and it never edits search results automatically.
 4. Choose **Use folder**, enter a query, and select **Search**.
 5. Select a result to open the file.
 6. Make a small edit and save it with **Save** or `Ctrl+S`.
+7. Open the terminal button when you need to run a project command. Preset
+   buttons insert a command so it can be reviewed before pressing Enter.
 
 The settings button controls the editor font size, context line count, and
 light/dark/system theme. Fresh installations start with common minified files
@@ -58,6 +63,8 @@ server. It does not require a hosted service or an external account.
 - The editor accepts UTF-8 text files up to 8 MB.
 - Saves use a temporary file followed by an atomic replacement.
 - A changed-on-disk check prevents silent overwrites of newer file versions.
+- Terminal commands run only after the user enters or confirms them, use the
+  selected folder as their working directory, and allow only one active process.
 - Common generated directories such as `.git`, `node_modules`, `dist`, `build`,
   and `vendor` are skipped during search.
 - There are no rename, delete, bulk-replace, or automatic-edit actions.
@@ -112,6 +119,9 @@ python <path-to-plugin-creator>/scripts/validate_plugin.py .
   syntax highlighting or language intelligence.
 - Native folder selection is currently Windows-only.
 - Very large or non-UTF-8 files are not opened for editing.
+- The project console is designed for build scripts and similar commands; it is
+  not a full interactive ConPTY terminal, so programs that require a TTY may not
+  behave correctly.
 - The button labelled **Open side panel** relies on the display modes supported
   by the current Codex desktop build.
 

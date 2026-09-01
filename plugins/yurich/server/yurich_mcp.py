@@ -10,11 +10,13 @@ from typing import Any
 from filesystem_ops import YurichError, choose_folder, read_file, save_file, validate_root
 from search_ops import search_files, search_project
 from state_ops import load_state, save_state
+from terminal_ops import list_package_scripts, poll_command, start_command, stop_command
 
 VERSION = "0.1.0"
-UI_URI = "ui://yurich/main-v5.html"
+UI_URI = "ui://yurich/main-v6.html"
 UI_URIS = (
     UI_URI,
+    "ui://yurich/main-v5.html",
     "ui://yurich/main-v4.html",
     "ui://yurich/main-v3.html",
     "ui://yurich/main-v2.html",
@@ -155,6 +157,46 @@ TOOLS = [
         },
         "_meta": {"openai/widgetAccessible": True},
     },
+    {
+        "name": "list_package_scripts", "title": "List package scripts",
+        "description": "List npm script names from package.json in the selected folder.",
+        "inputSchema": schema({"root": ROOT}, ["root"]),
+        "annotations": {"readOnlyHint": True, "openWorldHint": False},
+        "_meta": {"openai/widgetAccessible": True},
+    },
+    {
+        "name": "start_command", "title": "Run project command",
+        "description": "Run a command in the selected local folder after an explicit user action.",
+        "inputSchema": schema({"root": ROOT, "command": {"type": "string"}}, ["root", "command"]),
+        "annotations": {
+            "readOnlyHint": False, "destructiveHint": True,
+            "idempotentHint": False, "openWorldHint": True,
+        },
+        "_meta": {"openai/widgetAccessible": True},
+    },
+    {
+        "name": "poll_command", "title": "Read command output",
+        "description": "Read new output from a YURICH terminal command.",
+        "inputSchema": schema({
+            "processId": {"type": "string"},
+            "cursor": {"type": "integer", "minimum": 0, "default": 0},
+        }, ["processId"]),
+        "annotations": {"readOnlyHint": True, "openWorldHint": False},
+        "_meta": {"openai/widgetAccessible": True},
+    },
+    {
+        "name": "stop_command", "title": "Stop project command",
+        "description": "Stop a running YURICH terminal command and its child processes.",
+        "inputSchema": schema({
+            "processId": {"type": "string"},
+            "cursor": {"type": "integer", "minimum": 0, "default": 0},
+        }, ["processId"]),
+        "annotations": {
+            "readOnlyHint": False, "destructiveHint": True,
+            "idempotentHint": True, "openWorldHint": False,
+        },
+        "_meta": {"openai/widgetAccessible": True},
+    },
 ]
 
 HANDLERS = {
@@ -166,6 +208,10 @@ HANDLERS = {
     "save_state": save_state,
     "read_file": read_file,
     "save_file": save_file,
+    "list_package_scripts": list_package_scripts,
+    "start_command": start_command,
+    "poll_command": poll_command,
+    "stop_command": stop_command,
 }
 
 

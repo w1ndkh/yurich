@@ -18,7 +18,8 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
 .empty{padding:55px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}.empty strong{display:block;color:var(--text);margin-bottom:6px}.results{border:1px solid var(--line);border-radius:10px;overflow:hidden}.file-group+.file-group{border-top:1px solid var(--line)}.file-head{display:flex;align-items:center;gap:8px;width:100%;border:0;border-radius:0;padding:9px 12px;background:var(--soft);text-align:left}.path{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--code-font);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.count{margin-left:auto;color:var(--muted);font-size:var(--tiny-font)}.match{display:grid;grid-template-columns:52px minmax(0,1fr);cursor:pointer}.match:hover{background:var(--soft)}.line-no{padding:5px 9px;text-align:right;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--tiny-font);user-select:none}.code{padding:5px 10px;white-space:pre;overflow:hidden;text-overflow:ellipsis;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--code-font)}.code mark{background:var(--match);color:inherit;border-radius:2px}.file-result{display:flex;align-items:center;gap:9px;width:100%;padding:10px 12px;border:0;border-radius:0;text-align:left;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.file-result+.file-result{border-top:1px solid var(--line)}.file-result::before{content:"▱";color:var(--muted)}
 .editor{display:none}.editor.active{display:block}.search-view.hidden{display:none}.editor-head{display:flex;gap:9px;align-items:center;padding-bottom:10px}.editor-path{font:600 var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dirty{color:var(--danger);font-size:var(--tiny-font)}.conflict{display:none;margin-bottom:9px;padding:9px 11px;border:1px solid color-mix(in srgb,var(--danger) 45%,var(--line));background:color-mix(in srgb,var(--danger) 8%,transparent);border-radius:8px;color:var(--danger)}.conflict.show{display:flex;align-items:center;gap:10px}
 .editor-box{display:grid;grid-template-columns:auto 1fr;height:min(70vh,720px);border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--bg)}.gutter{margin:0;padding:12px 8px;min-width:44px;overflow:hidden;text-align:right;color:var(--muted);background:var(--soft);font:var(--code-font)/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;user-select:none}.source{width:100%;height:100%;resize:none;border:0;outline:0;padding:12px;overflow:auto;background:transparent;white-space:pre;tab-size:4;font:var(--code-font)/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
-.kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 4px;font-size:calc(var(--font-size) - 4px);color:var(--muted)}@media(max-width:650px){body{padding:0}.app{border:0;border-radius:0;min-height:100vh}.folder-row{align-items:stretch;flex-wrap:wrap}.folder{flex-basis:100%}.saved-row{flex-wrap:wrap}.compact-select{flex:1}.search-mode,.history-select{width:auto;max-width:100px}.options{gap:8px}.glob{width:110px}.subtitle{display:none}.editor-head{flex-wrap:wrap}}
+.terminal-panel{border-top:1px solid var(--line);background:#0d1117;color:#d9e1ea}.terminal-panel[hidden]{display:none}.terminal-head{display:flex;align-items:center;gap:9px;padding:8px 12px;border-bottom:1px solid #27313c;background:#151b23}.terminal-title{font-weight:700}.terminal-cwd{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#8b9aad;font:var(--tiny-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-panel button{border-color:#354150;background:#18202a;color:#d9e1ea}.terminal-panel button:hover{background:#222d39}.terminal-panel .primary{background:#d9e1ea;color:#0d1117;border-color:#d9e1ea}.terminal-presets{display:flex;align-items:center;gap:6px;padding:8px 12px;overflow-x:auto;border-bottom:1px solid #27313c}.terminal-presets button{flex:0 0 auto;padding:5px 9px;font-size:var(--tiny-font)}.package-scripts{display:flex;gap:6px}.terminal-hint{margin-left:auto;white-space:nowrap;color:#7f8c9b;font-size:var(--tiny-font)}.terminal-output{height:220px;margin:0;padding:11px 13px;overflow:auto;background:#0d1117;color:#d9e1ea;white-space:pre-wrap;overflow-wrap:anywhere;font:var(--code-font)/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-command-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-top:1px solid #27313c;background:#111821}.terminal-prompt{color:#69d28f;font:700 var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#f1f5f9;font:var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-status{min-height:24px;padding:4px 12px 7px;color:#8b9aad;font-size:var(--tiny-font)}.terminal-status.error{color:#ff8b82}.terminal-status.ok{color:#69d28f}.terminal-active{color:var(--accent)}
+.kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 4px;font-size:calc(var(--font-size) - 4px);color:var(--muted)}@media(max-width:650px){body{padding:0}.app{border:0;border-radius:0;min-height:100vh}.folder-row{align-items:stretch;flex-wrap:wrap}.folder{flex-basis:100%}.saved-row{flex-wrap:wrap}.compact-select{flex:1}.search-mode,.history-select{width:auto;max-width:100px}.options{gap:8px}.glob{width:110px}.subtitle{display:none}.editor-head{flex-wrap:wrap}.terminal-cwd,.terminal-hint{display:none}.terminal-output{height:180px}.terminal-command-row{flex-wrap:wrap}.terminal-input{flex-basis:70%}}
 </style>
 </head>
 <body>
@@ -60,6 +61,9 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
           <div class="setting-actions"><button id="resetExcludes" type="button">Default excludes</button><button id="clearHistory" type="button">Clear history</button></div>
         </div>
       </div>
+      <button id="terminalToggle" class="icon-button" type="button" title="Open project terminal" aria-label="Open project terminal" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m7 9 3 3-3 3M13 15h4"></path></svg>
+      </button>
       <button id="sidePanel" class="icon-button" type="button" title="Open side panel" aria-label="Open side panel">
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M15 4v16"></path></svg>
       </button>
@@ -113,6 +117,29 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
       <div id="editorStatus" class="status"></div>
     </section>
   </main>
+  <section id="terminalPanel" class="terminal-panel" hidden>
+    <div class="terminal-head">
+      <span class="terminal-title">Terminal</span>
+      <span id="terminalCwd" class="terminal-cwd">Choose a project folder</span>
+      <span class="spacer"></span>
+      <button id="terminalClear" type="button">Clear</button>
+      <button id="terminalClose" type="button" title="Close terminal" aria-label="Close terminal">×</button>
+    </div>
+    <div class="terminal-presets">
+      <button type="button" data-terminal-command="npm run build">Build</button>
+      <button type="button" data-terminal-command="npm run dev">Dev</button>
+      <div id="packageScripts" class="package-scripts"></div>
+      <span class="terminal-hint">Buttons insert commands · Enter runs · Ctrl+C stops</span>
+    </div>
+    <pre id="terminalOutput" class="terminal-output" aria-live="polite" tabindex="0">YURICH project console ready. Commands run in the selected folder.</pre>
+    <div class="terminal-command-row">
+      <span class="terminal-prompt">PS›</span>
+      <input id="terminalInput" class="terminal-input" autocomplete="off" spellcheck="false" placeholder="Enter a PowerShell command…">
+      <button id="terminalRun" class="primary" type="button">Run</button>
+      <button id="terminalStop" type="button" disabled>Stop</button>
+    </div>
+    <div id="terminalStatus" class="terminal-status">Idle</div>
+  </section>
 </div>
 <script>
 const $ = id => document.getElementById(id);
@@ -121,7 +148,8 @@ const CSS_INCLUDES = "*.css, *.scss, *.sass, *.less, *.vue, *.html, *.htm, *.bla
 const state = {
   root:"", file:"", original:"", metadata:null, line:1, busy:false,
   restored:false, persistTimer:null, matches:[], matchIndex:-1,
-  searchHistory:[], recentFolders:[], favoriteFolders:[]
+  searchHistory:[], recentFolders:[], favoriteFolders:[],
+  terminal:{processId:null,cursor:0,running:false,pollTimer:null,generation:0,root:""}
 };
 const pending = new Map();
 let requestId = 1;
@@ -235,7 +263,8 @@ function stateSnapshot() {
     searchMode:$("searchMode").value,
     searchHistory:state.searchHistory,
     recentFolders:state.recentFolders,
-    favoriteFolders:state.favoriteFolders
+    favoriteFolders:state.favoriteFolders,
+    terminalOpen:!$("terminalPanel").hidden
   };
 }
 
@@ -336,6 +365,9 @@ function restoreState(saved, autoSearch = false) {
   updateSearchMode(false);
   state.root = $("root").value;
   refreshSavedChoices();
+  refreshTerminalRoot();
+  setTerminalOpen(saved.terminalOpen === true, false);
+  if (state.root) loadPackageScripts();
   if (state.root && $("query").value && autoSearch) {
     status("Restoring the last search…", "", true);
     setTimeout(search, 80);
@@ -345,11 +377,18 @@ function restoreState(saved, autoSearch = false) {
 }
 
 function setRoot(root, announce = true, remember = true) {
+  if (root && root !== state.root && state.terminal.running) {
+    setTerminalOpen(true);
+    terminalStatus("Stop the running command before changing the project folder.", "error");
+    return false;
+  }
   if (root && root !== state.root && !confirmDiscard("Discard unsaved edits and change folder?")) return false;
   state.root = root || "";
   $("root").value = state.root;
   if (remember && state.root) rememberRoot(state.root);
   else refreshSavedChoices();
+  refreshTerminalRoot();
+  if (state.root) loadPackageScripts();
   persist();
   if (announce && root) status("Folder ready: " + root, "ok");
   return true;
@@ -630,6 +669,158 @@ async function saveFile() {
   } finally { setBusy(false); }
 }
 
+function setTerminalOpen(open, save = true) {
+  $("terminalPanel").hidden = !open;
+  $("terminalToggle").classList.toggle("terminal-active", open);
+  $("terminalToggle").setAttribute("aria-expanded", String(open));
+  $("terminalToggle").setAttribute("aria-label", open ? "Close project terminal" : "Open project terminal");
+  if (open) {
+    refreshTerminalRoot();
+    if (state.root) loadPackageScripts();
+  }
+  if (save) persist();
+}
+
+function refreshTerminalRoot() {
+  const root = state.terminal.running ? state.terminal.root : state.root;
+  $("terminalCwd").textContent = root || "Choose a project folder";
+}
+
+function terminalStatus(text, kind = "") {
+  $("terminalStatus").className = "terminal-status " + kind;
+  $("terminalStatus").textContent = text;
+}
+
+function terminalWrite(text) {
+  if (!text) return;
+  const output = $("terminalOutput");
+  output.textContent += text;
+  if (output.textContent.length > 300000) {
+    output.textContent = "[Earlier output trimmed]\n" + output.textContent.slice(-280000);
+  }
+  output.scrollTop = output.scrollHeight;
+}
+
+function setTerminalRunning(running) {
+  state.terminal.running = running;
+  $("terminalRun").disabled = running;
+  $("terminalStop").disabled = !running;
+  $("terminalInput").setAttribute("aria-busy", String(running));
+  refreshTerminalRoot();
+}
+
+function insertTerminalCommand(command) {
+  setTerminalOpen(true);
+  $("terminalInput").value = command;
+  $("terminalInput").focus();
+  $("terminalInput").setSelectionRange(command.length, command.length);
+}
+
+async function loadPackageScripts() {
+  const root = state.root;
+  const container = $("packageScripts");
+  container.replaceChildren();
+  if (!root) return;
+  try {
+    const data = await rpcCall("list_package_scripts", {root});
+    if (root !== state.root) return;
+    for (const name of data.scripts || []) {
+      if (["build","dev"].includes(name)) continue;
+      const button = Object.assign(document.createElement("button"), {type:"button", textContent:name});
+      button.title = "Insert npm run " + name;
+      button.onclick = () => insertTerminalCommand("npm run " + name);
+      container.append(button);
+    }
+  } catch (_) {}
+}
+
+function appendTerminalPoll(data) {
+  if (data.truncated) terminalWrite("\n[Earlier server output was trimmed]\n");
+  terminalWrite(data.output || "");
+  state.terminal.cursor = Number(data.cursor || state.terminal.cursor);
+}
+
+function finishTerminal(data) {
+  clearTimeout(state.terminal.pollTimer);
+  setTerminalRunning(false);
+  const stopped = data.status === "stopped";
+  const exitCode = data.exitCode;
+  terminalWrite("\n[" + (stopped ? "Stopped" : "Process exited with code " + exitCode) + "]\n");
+  terminalStatus(stopped ? "Stopped" : "Finished with exit code " + exitCode, stopped || exitCode === 0 ? "ok" : "error");
+  state.terminal.processId = null;
+}
+
+async function pollTerminal(generation = state.terminal.generation) {
+  if (!state.terminal.processId || generation !== state.terminal.generation) return;
+  const processId = state.terminal.processId;
+  const cursor = state.terminal.cursor;
+  try {
+    const data = await rpcCall("poll_command", {processId, cursor});
+    if (generation !== state.terminal.generation) return;
+    appendTerminalPoll(data);
+    if (data.running || data.hasMore) {
+      state.terminal.pollTimer = setTimeout(() => pollTerminal(generation), 300);
+    } else {
+      finishTerminal(data);
+    }
+  } catch (error) {
+    if (generation !== state.terminal.generation) return;
+    setTerminalRunning(false);
+    state.terminal.processId = null;
+    terminalStatus(errorText(error), "error");
+  }
+}
+
+async function runTerminalCommand() {
+  if (state.terminal.running) return terminalStatus("A command is already running.", "error");
+  const command = $("terminalInput").value.trim();
+  let root = $("root").value.trim();
+  if (!root) return terminalStatus("Choose a project folder first.", "error");
+  if (!command) return terminalStatus("Enter a command to run.", "error");
+  setTerminalOpen(true);
+  try {
+    if (root !== state.root) {
+      const checked = await rpcCall("validate_root", {root});
+      if (!setRoot(checked.root, false)) return;
+      root = checked.root;
+    }
+    state.terminal.generation += 1;
+    clearTimeout(state.terminal.pollTimer);
+    terminalWrite("\n\nPS " + root + "> " + command + "\n");
+    terminalStatus("Starting…");
+    setTerminalRunning(true);
+    const data = await rpcCall("start_command", {root, command});
+    state.terminal.processId = data.processId;
+    state.terminal.cursor = Number(data.cursor || 0);
+    state.terminal.root = data.root;
+    terminalStatus("Running · PID " + data.systemPid);
+    pollTerminal(state.terminal.generation);
+  } catch (error) {
+    setTerminalRunning(false);
+    state.terminal.processId = null;
+    terminalStatus(errorText(error), "error");
+  }
+}
+
+async function stopTerminalCommand() {
+  if (!state.terminal.processId || !state.terminal.running) return;
+  const processId = state.terminal.processId;
+  const cursor = state.terminal.cursor;
+  state.terminal.generation += 1;
+  clearTimeout(state.terminal.pollTimer);
+  terminalStatus("Stopping…");
+  try {
+    const data = await rpcCall("stop_command", {processId, cursor});
+    appendTerminalPoll(data);
+    if (data.running || data.hasMore) pollTerminal(state.terminal.generation);
+    else finishTerminal(data);
+  } catch (error) {
+    setTerminalRunning(false);
+    state.terminal.processId = null;
+    terminalStatus(errorText(error), "error");
+  }
+}
+
 async function useSavedRoot(select) {
   const root = select.value;
   select.value = "";
@@ -675,6 +866,17 @@ $("searchHistory").onchange = () => {
 };
 $("searchMode").onchange = updateSearchMode;
 $("sidePanel").onclick = () => requestDisplayMode("fullscreen");
+$("terminalToggle").onclick = () => setTerminalOpen($("terminalPanel").hidden);
+$("terminalClose").onclick = () => setTerminalOpen(false);
+$("terminalClear").onclick = () => {
+  $("terminalOutput").textContent = "";
+  terminalStatus(state.terminal.running ? "Running" : "Idle");
+};
+$("terminalRun").onclick = runTerminalCommand;
+$("terminalStop").onclick = stopTerminalCommand;
+document.querySelectorAll("[data-terminal-command]").forEach(button => {
+  button.onclick = () => insertTerminalCommand(button.dataset.terminalCommand);
+});
 $("settings").onclick = () => {
   const panel = $("settingsPanel");
   panel.hidden = !panel.hidden;
@@ -700,7 +902,18 @@ $("source").addEventListener("keydown", event => {
 });
 $("query").addEventListener("keydown", event => { if (event.key === "Enter") search(); });
 $("root").addEventListener("keydown", event => { if (event.key === "Enter") validateRoot(); });
+$("terminalInput").addEventListener("keydown", event => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    runTerminalCommand();
+  }
+});
 document.addEventListener("keydown", event => {
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "c" && state.terminal.running && $("terminalPanel").contains(document.activeElement)) {
+    event.preventDefault();
+    stopTerminalCommand();
+    return;
+  }
   if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s" && $("editor").classList.contains("active")) {
     event.preventDefault(); saveFile();
   }
@@ -735,7 +948,7 @@ document.addEventListener("click", event => {
 });
 
 window.addEventListener("beforeunload", event => {
-  if (!isDirty()) return;
+  if (!isDirty() && !state.terminal.running) return;
   event.preventDefault();
   event.returnValue = "";
 });
@@ -746,6 +959,9 @@ applyTheme("auto");
 $("exclude").value = DEFAULT_EXCLUDES;
 refreshSavedChoices();
 updateMatchNavigation();
+setTerminalRunning(false);
+refreshTerminalRoot();
+setTerminalOpen(false, false);
 if (window.openai && window.openai.widgetState) restoreState(window.openai.widgetState, true);
 setTimeout(async () => {
   if (state.restored) return;

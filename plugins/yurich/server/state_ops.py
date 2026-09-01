@@ -16,7 +16,7 @@ STRING_LIMITS = {
     "include": 2048,
     "exclude": 2048,
 }
-BOOL_KEYS = {"caseSensitive", "wholeWord", "regex"}
+BOOL_KEYS = {"caseSensitive", "wholeWord", "regex", "terminalOpen"}
 INTEGER_LIMITS = {"fontSize": (11, 20), "contextLines": (0, 10)}
 ENUM_VALUES = {
     "theme": {"auto", "light", "dark"},
