@@ -7,15 +7,16 @@ import traceback
 from pathlib import Path
 from typing import Any
 
-from filesystem_ops import YurichError, choose_folder, read_file, save_file, validate_root
+from filesystem_ops import YurichError, choose_folder, open_in_notepad, read_file, save_file, validate_root
 from search_ops import search_files, search_project
 from state_ops import load_state, save_state
 from terminal_ops import list_package_scripts, poll_command, start_command, stop_command
 
 VERSION = "0.1.0"
-UI_URI = "ui://yurich/main-v7.html"
+UI_URI = "ui://yurich/main-v8.html"
 UI_URIS = (
     UI_URI,
+    "ui://yurich/main-v7.html",
     "ui://yurich/main-v6.html",
     "ui://yurich/main-v5.html",
     "ui://yurich/main-v4.html",
@@ -159,6 +160,16 @@ TOOLS = [
         "_meta": {"openai/widgetAccessible": True},
     },
     {
+        "name": "open_in_notepad", "title": "Open in Notepad",
+        "description": "Open a file from the selected folder in Windows Notepad.",
+        "inputSchema": schema({"root": ROOT, "path": FILE}, ["root", "path"]),
+        "annotations": {
+            "readOnlyHint": False, "destructiveHint": False,
+            "idempotentHint": False, "openWorldHint": False,
+        },
+        "_meta": {"openai/widgetAccessible": True},
+    },
+    {
         "name": "list_package_scripts", "title": "List package scripts",
         "description": "List npm script names from package.json in the selected folder.",
         "inputSchema": schema({"root": ROOT}, ["root"]),
@@ -209,6 +220,7 @@ HANDLERS = {
     "save_state": save_state,
     "read_file": read_file,
     "save_file": save_file,
+    "open_in_notepad": open_in_notepad,
     "list_package_scripts": list_package_scripts,
     "start_command": start_command,
     "poll_command": poll_command,

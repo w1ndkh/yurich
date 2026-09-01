@@ -166,6 +166,25 @@ def read_file(args: dict[str, Any]) -> dict[str, Any]:
     return {"status": "ok", "content": text, "metadata": file_metadata(root, path, text, raw, bom)}
 
 
+def open_in_notepad(args: dict[str, Any]) -> dict[str, Any]:
+    root, path = safe_file(args.get("root"), args.get("path"))
+    if os.name != "nt":
+        raise YurichError("Opening files in Notepad is available on Windows only.")
+    flags = getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
+    try:
+        subprocess.Popen(
+            ["notepad.exe", str(path)],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            shell=False,
+            creationflags=flags,
+        )
+    except OSError as exc:
+        raise YurichError(f"Could not open the file in Notepad: {exc}") from exc
+    return {"status": "opened", "path": relative_path(root, path)}
+
+
 def normalize_line_endings(content: str, style: str) -> str:
     if style == "MIXED":
         return content

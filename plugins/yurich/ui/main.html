@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>YURICH</title>
 <style>
-:root{color-scheme:light dark;--bg:#f7f7f5;--panel:#fff;--text:#171717;--muted:#707070;--line:#deded9;--soft:#efefeb;--accent:#1d4ed8;--match:#fff0a8;--danger:#b42318;--ok:#16803c;--shadow:0 12px 36px rgba(0,0,0,.10);--font-size:14px;--small-font:calc(var(--font-size) - 2px);--tiny-font:calc(var(--font-size) - 3px);--code-font:calc(var(--font-size) - 2px);--input-font:calc(var(--font-size) + 1px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151515;--panel:#1d1d1d;--text:#ededed;--muted:#a3a3a3;--line:#393939;--soft:#292929;--accent:#7aa2ff;--match:#655600;--danger:#ff8b82;--ok:#62d78b;--shadow:0 14px 42px rgba(0,0,0,.42)}}
-:root[data-theme="dark"]{--bg:#151515;--panel:#1d1d1d;--text:#ededed;--muted:#a3a3a3;--line:#393939;--soft:#292929;--accent:#7aa2ff;--match:#655600;--danger:#ff8b82;--ok:#62d78b;--shadow:0 14px 42px rgba(0,0,0,.42)}
+:root{color-scheme:light dark;--bg:#f7f7f5;--panel:#fff;--text:#171717;--muted:#707070;--line:#deded9;--soft:#efefeb;--accent:#1d4ed8;--match:#fff0a8;--match-active:#ffd21f;--danger:#b42318;--ok:#16803c;--shadow:0 12px 36px rgba(0,0,0,.10);--font-size:14px;--small-font:calc(var(--font-size) - 2px);--tiny-font:calc(var(--font-size) - 3px);--code-font:calc(var(--font-size) - 2px);--input-font:calc(var(--font-size) + 1px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151515;--panel:#1d1d1d;--text:#ededed;--muted:#a3a3a3;--line:#393939;--soft:#292929;--accent:#7aa2ff;--match:#655600;--match-active:#b98c00;--danger:#ff8b82;--ok:#62d78b;--shadow:0 14px 42px rgba(0,0,0,.42)}}
+:root[data-theme="dark"]{--bg:#151515;--panel:#1d1d1d;--text:#ededed;--muted:#a3a3a3;--line:#393939;--soft:#292929;--accent:#7aa2ff;--match:#655600;--match-active:#b98c00;--danger:#ff8b82;--ok:#62d78b;--shadow:0 14px 42px rgba(0,0,0,.42)}
 *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:var(--font-size)}
 body{padding:14px}.app{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:100%;height:calc(100vh - 28px);max-width:1160px;margin:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
 header{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}.logo{display:block;width:32px;height:32px;flex:0 0 32px}.logo svg{display:block;width:100%;height:100%;fill:var(--text)}.brand-logo{display:block;width:104px;height:auto;fill:var(--text)}.subtitle{color:var(--muted);font-size:var(--small-font)}.spacer{flex:1}.view-actions{display:flex;gap:5px}.icon-button{display:grid;place-items:center;width:32px;height:32px;padding:0;border-radius:8px}.icon-button svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.settings-wrap{position:relative}.settings-panel{position:absolute;z-index:20;right:0;top:38px;width:270px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}.settings-panel[hidden]{display:none}.setting-title{margin-bottom:10px;font-weight:700}.setting-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-top:10px}.setting-row input[type="range"]{grid-column:1/-1;width:100%;accent-color:var(--accent)}.setting-row select{grid-column:1/-1;width:100%;padding:6px;border:1px solid var(--line);border-radius:7px;background:var(--panel)}.setting-value{color:var(--muted);font-size:var(--small-font)}.setting-actions{display:flex;gap:6px;margin-top:12px}.setting-actions button{flex:1;padding:6px;font-size:var(--tiny-font)}
@@ -15,9 +15,10 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
 .workspace{min-width:0;min-height:0;padding:14px 16px 16px;overflow:auto;overscroll-behavior:contain}.row{display:flex;gap:8px;align-items:center}.folder-row{margin-bottom:8px}.folder{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--small-font)}.query{flex:1;min-width:0;border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:10px 12px;font-size:var(--input-font);outline:none}.query:focus,.folder:focus{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 16%,transparent)}.favorite-active{color:#d28b00}.saved-row{display:flex;gap:8px;margin:0 0 10px}.compact-select{min-width:0;max-width:230px;padding:6px 8px;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--muted)}.search-mode{width:112px;padding:9px 8px;border:1px solid var(--line);border-radius:9px;background:var(--panel)}.history-select{width:112px;padding:9px 7px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--muted)}
 .options{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:10px 1px 4px;color:var(--muted);font-size:var(--small-font)}.options label{display:flex;gap:5px;align-items:center}.glob{width:145px;border:0;border-bottom:1px solid var(--line);background:transparent;padding:3px}
 .search-status-row{display:flex;align-items:center;gap:8px}.status{min-height:28px;display:flex;align-items:center;gap:8px;padding:4px 1px;color:var(--muted);font-size:var(--small-font)}.search-status-row .status{flex:1}.status.error{color:var(--danger)}.status.ok{color:var(--ok)}.dot{width:7px;height:7px;border-radius:50%;background:currentColor}.spin{width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.match-nav{display:flex;align-items:center;gap:5px;color:var(--muted);font-size:var(--tiny-font)}.match-nav[hidden]{display:none}.match-nav button{padding:3px 8px}
-.empty{padding:55px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}.empty strong{display:block;color:var(--text);margin-bottom:6px}.results{border:1px solid var(--line);border-radius:10px;overflow:hidden}.file-group+.file-group{border-top:1px solid var(--line)}.file-head{display:flex;align-items:center;gap:8px;width:100%;border:0;border-radius:0;padding:9px 12px;background:var(--soft);text-align:left}.path{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--code-font);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.count{margin-left:auto;color:var(--muted);font-size:var(--tiny-font)}.match{display:grid;grid-template-columns:52px minmax(0,1fr);cursor:pointer}.match:hover{background:var(--soft)}.line-no{padding:5px 9px;text-align:right;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--tiny-font);user-select:none}.code{padding:5px 10px;white-space:pre;overflow:hidden;text-overflow:ellipsis;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--code-font)}.code mark{background:var(--match);color:inherit;border-radius:2px}.file-result{display:flex;align-items:center;gap:9px;width:100%;padding:10px 12px;border:0;border-radius:0;text-align:left;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.file-result+.file-result{border-top:1px solid var(--line)}.file-result::before{content:"▱";color:var(--muted)}
+.empty{padding:55px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}.empty strong{display:block;color:var(--text);margin-bottom:6px}.results{border:1px solid var(--line);border-radius:10px;overflow:hidden}.file-group+.file-group{border-top:1px solid var(--line)}.file-head{display:flex;align-items:center;gap:8px;width:100%;border:0;border-radius:0;padding:9px 12px;background:var(--soft);text-align:left}.path{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--code-font);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.count{margin-left:auto;color:var(--muted);font-size:var(--tiny-font)}.context-block+.context-block{border-top:2px solid var(--line)}.match{display:grid;grid-template-columns:52px minmax(0,1fr);cursor:pointer}.match:hover{background:var(--soft)}.match.active-result{background:color-mix(in srgb,var(--match-active) 18%,var(--panel))}.match.active-result .code mark{background:var(--match-active);box-shadow:0 0 0 2px color-mix(in srgb,var(--match-active) 48%,transparent)}.line-no{padding:5px 9px;text-align:right;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--tiny-font);user-select:none}.code{padding:5px 10px;white-space:pre;overflow:hidden;text-overflow:ellipsis;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--code-font)}.code mark{background:var(--match);color:inherit;border-radius:2px}.file-result{display:flex;align-items:center;gap:9px;width:100%;padding:10px 12px;border:0;border-radius:0;text-align:left;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.file-result+.file-result{border-top:1px solid var(--line)}.file-result::before{content:"▱";color:var(--muted)}.file-result.active-result{background:color-mix(in srgb,var(--match-active) 22%,var(--panel));box-shadow:inset 3px 0 var(--match-active)}
 .editor{display:none}.editor.active{display:block}.search-view.hidden{display:none}.editor-head{display:flex;gap:9px;align-items:center;padding-bottom:10px}.editor-path{font:600 var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dirty{color:var(--danger);font-size:var(--tiny-font)}.conflict{display:none;margin-bottom:9px;padding:9px 11px;border:1px solid color-mix(in srgb,var(--danger) 45%,var(--line));background:color-mix(in srgb,var(--danger) 8%,transparent);border-radius:8px;color:var(--danger)}.conflict.show{display:flex;align-items:center;gap:10px}
 .editor-box{display:grid;grid-template-columns:auto 1fr;height:min(70vh,720px);border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--bg)}.gutter{margin:0;padding:12px 8px;min-width:44px;overflow:hidden;text-align:right;color:var(--muted);background:var(--soft);font:var(--code-font)/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;user-select:none}.source{width:100%;height:100%;resize:none;border:0;outline:0;padding:12px;overflow:auto;background:transparent;white-space:pre;tab-size:4;font:var(--code-font)/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
+.context-menu{position:fixed;z-index:1000;min-width:190px;padding:5px;background:var(--panel);border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow)}.context-menu[hidden]{display:none}.context-menu button{width:100%;border:0;text-align:left}
 .terminal-panel{display:grid;grid-template-rows:7px auto auto minmax(0,1fr) auto auto;height:340px;min-width:0;min-height:0;overflow:hidden;background:var(--panel);color:var(--text)}.terminal-panel[hidden]{display:none}.terminal-resize{position:relative;height:7px;cursor:ns-resize;touch-action:none;outline:none;background:var(--panel)}.terminal-resize::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:var(--line)}.terminal-resize::after{content:"";position:absolute;top:2px;left:50%;width:42px;height:3px;border-radius:9px;background:var(--line);transform:translateX(-50%)}.terminal-resize:hover::after,.terminal-resize:focus-visible::after,.resizing-terminal .terminal-resize::after{background:var(--accent)}.resizing-terminal,.resizing-terminal *{cursor:ns-resize!important;user-select:none!important}.terminal-head{display:flex;align-items:center;gap:9px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel)}.terminal-title{font-weight:700}.terminal-cwd{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font:var(--tiny-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-presets{display:flex;max-height:86px;overflow-y:auto;flex-wrap:wrap;align-items:center;gap:6px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel)}.terminal-presets button{flex:0 0 auto;padding:5px 9px;font-size:var(--tiny-font)}.package-scripts{display:flex;min-width:0;flex-wrap:wrap;gap:6px}.terminal-hint{margin-left:auto;color:var(--muted);font-size:var(--tiny-font)}.terminal-output{min-height:0;margin:0;padding:11px 13px;overflow:auto;background:var(--bg);color:var(--text);white-space:pre-wrap;overflow-wrap:anywhere;font:var(--code-font)/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-command-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-top:1px solid var(--line);background:var(--panel)}.terminal-prompt{color:var(--ok);font:700 var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font:var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-status{min-height:24px;padding:4px 12px 7px;color:var(--muted);font-size:var(--tiny-font)}.terminal-status.error{color:var(--danger)}.terminal-status.ok{color:var(--ok)}.terminal-active{color:var(--accent)}
 .kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 4px;font-size:calc(var(--font-size) - 4px);color:var(--muted)}@media(max-width:650px){body{padding:0}.app{height:100vh;border:0;border-radius:0}.folder-row{align-items:stretch;flex-wrap:wrap}.folder{flex-basis:100%}.saved-row{flex-wrap:wrap}.compact-select{flex:1}.search-mode,.history-select{width:auto;max-width:100px}.options{gap:8px}.glob{width:110px}.subtitle{display:none}.editor-head{flex-wrap:wrap}.terminal-cwd,.terminal-hint{display:none}.terminal-command-row{flex-wrap:wrap}.terminal-input{flex-basis:70%}}
 </style>
@@ -113,7 +114,7 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
         <button id="save" class="primary">Save</button>
       </div>
       <div id="conflict" class="conflict"><span>The file changed on disk.</span><div class="spacer"></div><button id="conflictReload">Reload disk version</button></div>
-      <div class="editor-box"><pre id="gutter" class="gutter">1</pre><textarea id="source" class="source" spellcheck="false" wrap="off"></textarea></div>
+      <div id="editorBox" class="editor-box"><pre id="gutter" class="gutter">1</pre><textarea id="source" class="source" spellcheck="false" wrap="off"></textarea></div>
       <div id="editorStatus" class="status"></div>
     </section>
   </main>
@@ -142,13 +143,14 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
     <div id="terminalStatus" class="terminal-status">Idle</div>
   </section>
 </div>
+<div id="fileContextMenu" class="context-menu" hidden><button id="openNotepad" type="button">Open saved file in Notepad</button></div>
 <script>
 const $ = id => document.getElementById(id);
 const DEFAULT_EXCLUDES = "*.min.js, *.min.css, *.map";
 const CSS_INCLUDES = "*.css, *.scss, *.sass, *.less, *.vue, *.html, *.htm, *.blade.php, *.tsx, *.jsx";
 const DEFAULT_TERMINAL_HEIGHT = 340;
 const state = {
-  root:"", file:"", original:"", metadata:null, line:1, busy:false,
+  root:"", file:"", original:"", metadata:null, line:1, busy:false, contextPath:"",
   restored:false, persistTimer:null, matches:[], matchIndex:-1,
   searchHistory:[], recentFolders:[], favoriteFolders:[],
   terminal:{processId:null,cursor:0,running:false,pollTimer:null,generation:0,scriptsGeneration:0,height:DEFAULT_TERMINAL_HEIGHT,resize:null,root:""}
@@ -452,9 +454,11 @@ function renderResults(data) {
   }
   if (data.mode === "files") {
     for (const file of data.files || []) {
-      const index = state.matches.push({path:file, line:1}) - 1;
+      const index = state.matches.push({path:file, line:1, element:null}) - 1;
       const button = Object.assign(document.createElement("button"), {className:"file-result", textContent:file});
+      state.matches[index].element = button;
       button.onclick = () => openMatch(index);
+      button.oncontextmenu = event => showFileContextMenu(event, file);
       output.append(button);
     }
     updateMatchNavigation();
@@ -472,19 +476,26 @@ function renderResults(data) {
     head.onclick = () => openMatch(firstIndex);
     section.append(head);
     for (const item of group.matches) {
-      const index = state.matches.push({path:group.path, line:item.lineNumber}) - 1;
+      const index = state.matches.push({path:group.path, line:item.lineNumber, element:null}) - 1;
       const context = item.context && item.context.length ? item.context : [{lineNumber:item.lineNumber,text:item.text,isMatch:true}];
+      const block = document.createElement("div");
+      block.className = "context-block";
       for (const row of context) {
         const match = document.createElement("div");
         match.className = "match";
         match.onclick = () => openMatch(index);
+        match.oncontextmenu = event => showFileContextMenu(event, group.path);
         const no = Object.assign(document.createElement("div"), {className:"line-no", textContent:row.lineNumber});
         const code = Object.assign(document.createElement("div"), {className:"code"});
-        if (row.isMatch) markLine(code, row.text, item.column, item.endColumn);
+        if (row.isMatch) {
+          markLine(code, row.text, item.column, item.endColumn);
+          state.matches[index].element = match;
+        }
         else code.textContent = row.text;
         match.append(no, code);
-        section.append(match);
+        block.append(match);
       }
+      section.append(block);
     }
     output.append(section);
   }
@@ -513,7 +524,25 @@ async function openMatch(index) {
   await openFile(target.path, target.line, index);
 }
 
-function moveMatch(offset) {
+function selectResultMatch(index, scroll = true) {
+  const count = state.matches.length;
+  if (!count) return;
+  index = (index + count) % count;
+  for (const match of state.matches) match.element?.classList.remove("active-result");
+  state.matchIndex = index;
+  const element = state.matches[index].element;
+  element?.classList.add("active-result");
+  if (scroll) element?.scrollIntoView({block:"center", behavior:"smooth"});
+  updateMatchNavigation();
+}
+
+function moveResultSelection(offset) {
+  if (!state.matches.length) return;
+  const start = state.matchIndex >= 0 ? state.matchIndex : (offset > 0 ? -1 : 0);
+  selectResultMatch(start + offset);
+}
+
+function moveEditorMatch(offset) {
   if (!state.matches.length) return;
   const start = state.matchIndex >= 0 ? state.matchIndex : (offset > 0 ? -1 : 0);
   openMatch(start + offset);
@@ -634,6 +663,39 @@ function backToResults() {
   if (!confirmDiscard()) return;
   $("editor").classList.remove("active");
   $("searchView").classList.remove("hidden");
+  selectResultMatch(state.matchIndex, false);
+}
+
+function hideFileContextMenu() {
+  $("fileContextMenu").hidden = true;
+  state.contextPath = "";
+}
+
+function showFileContextMenu(event, path) {
+  if (!path) return;
+  event.preventDefault();
+  event.stopPropagation();
+  state.contextPath = path;
+  const menu = $("fileContextMenu");
+  menu.hidden = false;
+  const width = menu.offsetWidth, height = menu.offsetHeight;
+  menu.style.left = Math.max(6, Math.min(event.clientX, window.innerWidth - width - 6)) + "px";
+  menu.style.top = Math.max(6, Math.min(event.clientY, window.innerHeight - height - 6)) + "px";
+}
+
+async function openFileInNotepad(path) {
+  if (!path) return;
+  if (path === state.file && $("source").value !== state.original && !confirm("Unsaved YURICH edits are not visible in Notepad. Open the saved file anyway?")) return;
+  hideFileContextMenu();
+  try {
+    const data = await rpcCall("open_in_notepad", {root:state.root, path});
+    const message = "Opened " + (data.path || path) + " in Notepad.";
+    if ($("editor").classList.contains("active")) editorStatus(message, "ok");
+    else status(message, "ok");
+  } catch (error) {
+    if ($("editor").classList.contains("active")) editorStatus(errorText(error), "error");
+    else status(errorText(error), "error");
+  }
 }
 
 async function reloadFile() {
@@ -959,10 +1021,12 @@ $("reload").onclick = reloadFile;
 $("conflictReload").onclick = reloadFile;
 $("save").onclick = saveFile;
 $("findVariable").onclick = findCssVariable;
-$("previousResult").onclick = () => moveMatch(-1);
-$("nextResult").onclick = () => moveMatch(1);
-$("previousMatch").onclick = () => moveMatch(-1);
-$("nextMatch").onclick = () => moveMatch(1);
+$("previousResult").onclick = () => moveResultSelection(-1);
+$("nextResult").onclick = () => moveResultSelection(1);
+$("previousMatch").onclick = () => moveEditorMatch(-1);
+$("nextMatch").onclick = () => moveEditorMatch(1);
+$("editorBox").addEventListener("contextmenu", event => showFileContextMenu(event, state.file));
+$("openNotepad").onclick = () => openFileInNotepad(state.contextPath);
 $("source").addEventListener("input", updateGutter);
 $("source").addEventListener("scroll", syncScroll);
 $("source").addEventListener("keydown", event => {
@@ -991,9 +1055,14 @@ document.addEventListener("keydown", event => {
   }
   if (event.key === "F3") {
     event.preventDefault();
-    moveMatch(event.shiftKey ? -1 : 1);
+    if ($("editor").classList.contains("active")) moveEditorMatch(event.shiftKey ? -1 : 1);
+    else moveResultSelection(event.shiftKey ? -1 : 1);
   }
 });
+document.addEventListener("pointerdown", event => {
+  if (!$("fileContextMenu").hidden && !$("fileContextMenu").contains(event.target)) hideFileContextMenu();
+});
+window.addEventListener("resize", hideFileContextMenu);
 
 ["root","query","include","exclude"].forEach(id => $(id).addEventListener("input", persist));
 ["caseSensitive","wholeWord","regex"].forEach(id => $(id).addEventListener("change", persist));

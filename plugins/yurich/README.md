@@ -21,10 +21,13 @@ not a bulk refactoring tool and it never edits search results automatically.
   included file globs, and excluded file globs.
 - **File-name search** for locating a file by its name or relative path without
   searching its contents.
-- **Readable results** grouped by file, with matching text highlighted and
-  a configurable number of nearby lines shown for context.
+- **Readable results** grouped by file, with separated context blocks,
+  highlighted matches, keyboard-style next/previous selection, and a
+  configurable number of nearby lines.
 - **Inline editor** with line numbers, match navigation, tab insertion, reload,
   and `Ctrl+S` saving.
+- **Open in Notepad** from the right-click menu for any result or the currently
+  opened file on Windows.
 - **CSS variable lookup** that finds the declaration of the custom property
   under the editor cursor or inside the current selection.
 - **Conflict protection** that stops a save when the file has changed on disk
