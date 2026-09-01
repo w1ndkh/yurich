@@ -1,6 +1,6 @@
 {
   "name": "yurich",
-  "version": "0.1.0+codex.20260901104017",
+  "version": "0.1.0+codex.20260901104850",
   "description": "Fast local project search, preview, and manual file editing.",
   "author": {
     "name": "Yurii Ray"
@@ -12,6 +12,7 @@
     "files",
     "developer-tools"
   ],
+  "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "YURICH",
