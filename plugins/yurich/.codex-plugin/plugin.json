@@ -1,6 +1,6 @@
 {
   "name": "yurich",
-  "version": "0.1.0+codex.20260901101705",
+  "version": "0.1.0+codex.20260901104017",
   "description": "Fast local project search, preview, and manual file editing.",
   "author": {
     "name": "Yurii Ray"
@@ -28,6 +28,8 @@
     "defaultPrompt": [
       "Open YURICH"
     ],
-    "brandColor": "#6B7280"
+    "brandColor": "#6B7280",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
   }
 }
