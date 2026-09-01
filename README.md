@@ -76,6 +76,12 @@ not a bulk refactoring tool and it never edits search results automatically.
 
 
 
+### Github Tab
+
+<img src="./docs/screenshots/github.png" alt="Github Commit and Push" width="100%">
+
+
+
 ## Typical workflow
 
 1. Start a new Codex task after installing or updating the plugin.
