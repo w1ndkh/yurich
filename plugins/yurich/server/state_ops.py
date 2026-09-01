@@ -15,6 +15,7 @@ STRING_LIMITS = {
     "query": 4096,
     "include": 2048,
     "exclude": 2048,
+    "gitDraft": 10000,
 }
 BOOL_KEYS = {"caseSensitive", "wholeWord", "regex", "terminalOpen"}
 INTEGER_LIMITS = {"fontSize": (11, 20), "contextLines": (0, 10), "terminalHeight": (150, 2000)}

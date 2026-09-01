@@ -8,14 +8,16 @@ from pathlib import Path
 from typing import Any
 
 from filesystem_ops import YurichError, choose_folder, open_in_notepad, read_file, save_file, validate_root
+from git_ops import git_commit, git_push, git_status
 from search_ops import search_files, search_project
 from state_ops import load_state, save_state
 from terminal_ops import list_package_scripts, poll_command, start_command, stop_command
 
 VERSION = "0.1.0"
-UI_URI = "ui://yurich/main-v8.html"
+UI_URI = "ui://yurich/main-v9.html"
 UI_URIS = (
     UI_URI,
+    "ui://yurich/main-v8.html",
     "ui://yurich/main-v7.html",
     "ui://yurich/main-v6.html",
     "ui://yurich/main-v5.html",
@@ -170,6 +172,37 @@ TOOLS = [
         "_meta": {"openai/widgetAccessible": True},
     },
     {
+        "name": "git_status", "title": "Read Git status",
+        "description": "Show the current branch and changed files for the selected repository.",
+        "inputSchema": schema({"root": ROOT}, ["root"]),
+        "annotations": {"readOnlyHint": True, "openWorldHint": False},
+        "_meta": {"openai/widgetAccessible": True},
+    },
+    {
+        "name": "git_commit", "title": "Commit selected files",
+        "description": "Create a local Git commit containing only the explicitly selected files.",
+        "inputSchema": schema({
+            "root": ROOT,
+            "files": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+            "message": {"type": "string", "minLength": 1, "maxLength": 10000},
+        }, ["root", "files", "message"]),
+        "annotations": {
+            "readOnlyHint": False, "destructiveHint": False,
+            "idempotentHint": False, "openWorldHint": False,
+        },
+        "_meta": {"openai/widgetAccessible": True},
+    },
+    {
+        "name": "git_push", "title": "Push Git commits",
+        "description": "Push the current branch to its upstream or create origin/<branch> upstream.",
+        "inputSchema": schema({"root": ROOT}, ["root"]),
+        "annotations": {
+            "readOnlyHint": False, "destructiveHint": False,
+            "idempotentHint": False, "openWorldHint": True,
+        },
+        "_meta": {"openai/widgetAccessible": True},
+    },
+    {
         "name": "list_package_scripts", "title": "List package scripts",
         "description": "List npm script names from package.json in the selected folder.",
         "inputSchema": schema({"root": ROOT}, ["root"]),
@@ -221,6 +254,9 @@ HANDLERS = {
     "read_file": read_file,
     "save_file": save_file,
     "open_in_notepad": open_in_notepad,
+    "git_status": git_status,
+    "git_commit": git_commit,
+    "git_push": git_push,
     "list_package_scripts": list_package_scripts,
     "start_command": start_command,
     "poll_command": poll_command,

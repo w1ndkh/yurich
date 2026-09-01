@@ -47,6 +47,8 @@ not a bulk refactoring tool and it never edits search results automatically.
 - **Project console** for running commands in the selected folder, with live
   output, one-click `npm run build` / `npm run dev` presets, buttons for other
   `package.json` scripts, and Stop / `Ctrl+C` support.
+- **Focused Git workflow** with repository status, explicit file selection,
+  a locally saved commit-message draft, Commit, and Push.
 
 ## Screenshots
 
@@ -172,4 +174,3 @@ python <path-to-plugin-creator>/scripts/validate_plugin.py plugins/yurich
 
 YURICH is licensed under the [Apache License 2.0](LICENSE). You may use, modify,
 and redistribute it under the terms of that license.
-

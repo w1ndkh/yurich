@@ -19,6 +19,7 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
 .editor{display:none}.editor.active{display:block}.search-view.hidden{display:none}.editor-head{display:flex;gap:9px;align-items:center;padding-bottom:10px}.editor-path{font:600 var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dirty{color:var(--danger);font-size:var(--tiny-font)}.conflict{display:none;margin-bottom:9px;padding:9px 11px;border:1px solid color-mix(in srgb,var(--danger) 45%,var(--line));background:color-mix(in srgb,var(--danger) 8%,transparent);border-radius:8px;color:var(--danger)}.conflict.show{display:flex;align-items:center;gap:10px}
 .editor-box{display:grid;grid-template-columns:auto 1fr;height:min(70vh,720px);border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--bg)}.gutter{margin:0;padding:12px 8px;min-width:44px;overflow:hidden;text-align:right;color:var(--muted);background:var(--soft);font:var(--code-font)/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;user-select:none}.source{width:100%;height:100%;resize:none;border:0;outline:0;padding:12px;overflow:auto;background:transparent;white-space:pre;tab-size:4;font:var(--code-font)/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
 .context-menu{position:fixed;z-index:1000;min-width:190px;padding:5px;background:var(--panel);border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow)}.context-menu[hidden]{display:none}.context-menu button{width:100%;border:0;text-align:left}
+.git-view{display:none}.git-view.active{display:block}.git-head{display:flex;align-items:center;gap:9px;margin-bottom:12px}.git-title{font-weight:750;font-size:var(--input-font)}.git-root{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font:var(--tiny-font) ui-monospace,SFMono-Regular,Consolas,monospace}.git-summary{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:11px 12px;margin-bottom:10px;border:1px solid var(--line);border-radius:9px;background:var(--bg)}.git-branch{font-weight:700}.git-badge{padding:2px 7px;border-radius:999px;background:var(--soft);color:var(--muted);font-size:var(--tiny-font)}.git-last{flex-basis:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:var(--tiny-font)}.git-selection{display:flex;align-items:center;gap:8px;margin:7px 1px;color:var(--muted);font-size:var(--small-font)}.git-files{border:1px solid var(--line);border-radius:9px;overflow:hidden}.git-file{display:grid;grid-template-columns:auto 38px minmax(0,1fr);align-items:center;gap:8px;padding:8px 10px}.git-file+.git-file{border-top:1px solid var(--line)}.git-file:hover{background:var(--soft)}.git-code{font:700 var(--tiny-font) ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent)}.git-path{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace}.git-original{display:block;color:var(--muted);font-size:var(--tiny-font)}.git-empty{padding:35px 15px;text-align:center;color:var(--muted)}.git-compose{margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:9px}.git-compose label{display:block;margin-bottom:7px;font-weight:650}.git-message{display:block;width:100%;min-height:90px;resize:vertical;border:1px solid var(--line);border-radius:8px;padding:9px 10px;background:var(--panel);outline:none}.git-message:focus{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 16%,transparent)}.git-actions{display:flex;align-items:center;gap:8px;margin-top:9px}.git-actions .status{flex:1;padding:0;min-height:0}.git-output{margin-top:8px;max-height:110px;overflow:auto;white-space:pre-wrap;color:var(--muted);font:var(--tiny-font)/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}
 .terminal-panel{display:grid;grid-template-rows:7px auto auto minmax(0,1fr) auto auto;height:340px;min-width:0;min-height:0;overflow:hidden;background:var(--panel);color:var(--text)}.terminal-panel[hidden]{display:none}.terminal-resize{position:relative;height:7px;cursor:ns-resize;touch-action:none;outline:none;background:var(--panel)}.terminal-resize::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:var(--line)}.terminal-resize::after{content:"";position:absolute;top:2px;left:50%;width:42px;height:3px;border-radius:9px;background:var(--line);transform:translateX(-50%)}.terminal-resize:hover::after,.terminal-resize:focus-visible::after,.resizing-terminal .terminal-resize::after{background:var(--accent)}.resizing-terminal,.resizing-terminal *{cursor:ns-resize!important;user-select:none!important}.terminal-head{display:flex;align-items:center;gap:9px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel)}.terminal-title{font-weight:700}.terminal-cwd{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font:var(--tiny-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-presets{display:flex;max-height:86px;overflow-y:auto;flex-wrap:wrap;align-items:center;gap:6px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel)}.terminal-presets button{flex:0 0 auto;padding:5px 9px;font-size:var(--tiny-font)}.package-scripts{display:flex;min-width:0;flex-wrap:wrap;gap:6px}.terminal-hint{margin-left:auto;color:var(--muted);font-size:var(--tiny-font)}.terminal-output{min-height:0;margin:0;padding:11px 13px;overflow:auto;background:var(--bg);color:var(--text);white-space:pre-wrap;overflow-wrap:anywhere;font:var(--code-font)/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-command-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-top:1px solid var(--line);background:var(--panel)}.terminal-prompt{color:var(--ok);font:700 var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font:var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace}.terminal-status{min-height:24px;padding:4px 12px 7px;color:var(--muted);font-size:var(--tiny-font)}.terminal-status.error{color:var(--danger)}.terminal-status.ok{color:var(--ok)}.terminal-active{color:var(--accent)}
 .kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 4px;font-size:calc(var(--font-size) - 4px);color:var(--muted)}@media(max-width:650px){body{padding:0}.app{height:100vh;border:0;border-radius:0}.folder-row{align-items:stretch;flex-wrap:wrap}.folder{flex-basis:100%}.saved-row{flex-wrap:wrap}.compact-select{flex:1}.search-mode,.history-select{width:auto;max-width:100px}.options{gap:8px}.glob{width:110px}.subtitle{display:none}.editor-head{flex-wrap:wrap}.terminal-cwd,.terminal-hint{display:none}.terminal-command-row{flex-wrap:wrap}.terminal-input{flex-basis:70%}}
 </style>
@@ -62,6 +63,9 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
           <div class="setting-actions"><button id="resetExcludes" type="button">Default excludes</button><button id="clearHistory" type="button">Clear history</button></div>
         </div>
       </div>
+      <button id="gitToggle" class="icon-button" type="button" title="Open Git" aria-label="Open Git" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="5" r="2"></circle><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="8" r="2"></circle><path d="M6 7v10M8 7.5c5 0 3 6 8 6V10"></path></svg>
+      </button>
       <button id="terminalToggle" class="icon-button" type="button" title="Open project terminal" aria-label="Open project terminal" aria-expanded="false">
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m7 9 3 3-3 3M13 15h4"></path></svg>
       </button>
@@ -117,6 +121,28 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
       <div id="editorBox" class="editor-box"><pre id="gutter" class="gutter">1</pre><textarea id="source" class="source" spellcheck="false" wrap="off"></textarea></div>
       <div id="editorStatus" class="status"></div>
     </section>
+    <section id="gitView" class="git-view">
+      <div class="git-head">
+        <button id="gitBack" type="button">← Back</button>
+        <span class="git-title">Git</span>
+        <span id="gitRoot" class="git-root"></span>
+        <span class="spacer"></span>
+        <button id="gitRefresh" type="button">Refresh</button>
+      </div>
+      <div id="gitSummary" class="git-summary"><span class="git-branch">Select a Git repository folder.</span></div>
+      <label class="git-selection"><input id="gitSelectAll" type="checkbox"> <span id="gitSelectionText">0 files selected</span></label>
+      <div id="gitFiles" class="git-files"><div class="git-empty">Open Git to read repository status.</div></div>
+      <div class="git-compose">
+        <label for="gitMessage">Commit message draft</label>
+        <textarea id="gitMessage" class="git-message" maxlength="10000" placeholder="Describe this change…"></textarea>
+        <div class="git-actions">
+          <div id="gitStatus" class="status">Draft is stored locally on this computer.</div>
+          <button id="gitCommit" class="primary" type="button" disabled>Commit</button>
+          <button id="gitPush" type="button" disabled>Push</button>
+        </div>
+        <pre id="gitOutput" class="git-output" hidden></pre>
+      </div>
+    </section>
   </main>
   <section id="terminalPanel" class="terminal-panel" hidden>
     <div id="terminalResize" class="terminal-resize" role="separator" aria-label="Resize terminal" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" tabindex="0" title="Drag to resize · Double-click to reset"></div>
@@ -153,7 +179,8 @@ const state = {
   root:"", file:"", original:"", metadata:null, line:1, busy:false, contextPath:"",
   restored:false, persistTimer:null, matches:[], matchIndex:-1,
   searchHistory:[], recentFolders:[], favoriteFolders:[],
-  terminal:{processId:null,cursor:0,running:false,pollTimer:null,generation:0,scriptsGeneration:0,height:DEFAULT_TERMINAL_HEIGHT,resize:null,root:""}
+  terminal:{processId:null,cursor:0,running:false,pollTimer:null,generation:0,scriptsGeneration:0,height:DEFAULT_TERMINAL_HEIGHT,resize:null,root:""},
+  git:{data:null,selected:new Set(),busy:false,root:"",previousView:"search"}
 };
 const pending = new Map();
 let requestId = 1;
@@ -269,7 +296,8 @@ function stateSnapshot() {
     recentFolders:state.recentFolders,
     favoriteFolders:state.favoriteFolders,
     terminalOpen:!$("terminalPanel").hidden,
-    terminalHeight:Math.round(state.terminal.height)
+    terminalHeight:Math.round(state.terminal.height),
+    gitDraft:$("gitMessage").value
   };
 }
 
@@ -361,6 +389,7 @@ function restoreState(saved, autoSearch = false) {
   $("include").value = typeof saved.include === "string" ? saved.include : "";
   $("exclude").value = typeof saved.exclude === "string" ? saved.exclude : DEFAULT_EXCLUDES;
   $("searchMode").value = saved.searchMode === "filename" ? "filename" : "content";
+  $("gitMessage").value = typeof saved.gitDraft === "string" ? saved.gitDraft : "";
   state.searchHistory = Array.isArray(saved.searchHistory) ? saved.searchHistory : [];
   state.recentFolders = Array.isArray(saved.recentFolders) ? saved.recentFolders : [];
   state.favoriteFolders = Array.isArray(saved.favoriteFolders) ? saved.favoriteFolders : [];
@@ -735,6 +764,158 @@ async function saveFile() {
   } finally { setBusy(false); }
 }
 
+function gitStatusMessage(text, kind = "", loading = false) {
+  $("gitStatus").className = "status " + kind;
+  $("gitStatus").replaceChildren();
+  if (loading) $("gitStatus").append(Object.assign(document.createElement("span"), {className:"spin"}));
+  else if (kind) $("gitStatus").append(Object.assign(document.createElement("span"), {className:"dot"}));
+  $("gitStatus").append(document.createTextNode(text));
+}
+
+function setGitBusy(busy) {
+  state.git.busy = busy;
+  $("gitRefresh").disabled = busy;
+  $("gitSelectAll").disabled = busy || !(state.git.data?.files?.length);
+  document.querySelectorAll(".git-file input").forEach(input => input.disabled = busy);
+  updateGitActions();
+}
+
+function updateGitActions() {
+  const count = state.git.selected.size;
+  const total = state.git.data?.files?.length || 0;
+  $("gitSelectionText").textContent = count + (count === 1 ? " file selected" : " files selected");
+  $("gitSelectAll").checked = total > 0 && count === total;
+  $("gitSelectAll").indeterminate = count > 0 && count < total;
+  $("gitCommit").disabled = state.git.busy || !count || !$("gitMessage").value.trim();
+  $("gitPush").disabled = state.git.busy || !(state.git.data && (state.git.data.upstream || state.git.data.remote));
+}
+
+function renderGit(data, preserveSelection = false) {
+  const previous = preserveSelection ? new Set(state.git.selected) : null;
+  state.git.data = data;
+  state.git.root = data.root || "";
+  $("gitRoot").textContent = data.root || state.root;
+  const summary = $("gitSummary");
+  summary.replaceChildren();
+  const branch = Object.assign(document.createElement("span"), {className:"git-branch", textContent:data.detached ? "Detached · " + data.branch : data.branch});
+  summary.append(branch);
+  if (data.upstream) summary.append(Object.assign(document.createElement("span"), {className:"git-badge", textContent:data.upstream}));
+  if (data.ahead) summary.append(Object.assign(document.createElement("span"), {className:"git-badge", textContent:"↑ " + data.ahead + " ahead"}));
+  if (data.behind) summary.append(Object.assign(document.createElement("span"), {className:"git-badge", textContent:"↓ " + data.behind + " behind"}));
+  if (!data.remote && !data.upstream) summary.append(Object.assign(document.createElement("span"), {className:"git-badge", textContent:"No origin remote"}));
+  const last = data.lastCommit || {};
+  if (last.hash) summary.append(Object.assign(document.createElement("span"), {className:"git-last", textContent:"Last: " + last.hash + " · " + last.subject + (last.relativeTime ? " · " + last.relativeTime : "")}));
+  const files = $("gitFiles");
+  files.replaceChildren();
+  const available = new Set((data.files || []).map(file => file.path));
+  state.git.selected = previous ? new Set([...previous].filter(path => available.has(path))) : new Set(available);
+  if (!data.files?.length) {
+    files.append(Object.assign(document.createElement("div"), {className:"git-empty", textContent:"Working tree is clean."}));
+  } else {
+    for (const file of data.files) {
+      const row = document.createElement("label");
+      row.className = "git-file";
+      const checkbox = Object.assign(document.createElement("input"), {type:"checkbox", checked:state.git.selected.has(file.path)});
+      checkbox.onchange = () => {
+        if (checkbox.checked) state.git.selected.add(file.path);
+        else state.git.selected.delete(file.path);
+        updateGitActions();
+      };
+      const code = Object.assign(document.createElement("span"), {className:"git-code", textContent:file.code.replaceAll(" ", "·")});
+      const path = Object.assign(document.createElement("span"), {className:"git-path", textContent:file.path});
+      if (file.originalPath) path.append(Object.assign(document.createElement("span"), {className:"git-original", textContent:"from " + file.originalPath}));
+      row.append(checkbox, code, path);
+      files.append(row);
+    }
+  }
+  updateGitActions();
+}
+
+async function refreshGitStatus(preserveSelection = false) {
+  let root = $("root").value.trim();
+  if (!root) return gitStatusMessage("Choose a project folder first.", "error");
+  setGitBusy(true);
+  gitStatusMessage("Reading Git status…", "", true);
+  try {
+    if (root !== state.root) {
+      const checked = await rpcCall("validate_root", {root});
+      if (!setRoot(checked.root, false)) return;
+      root = checked.root;
+    }
+    const data = await rpcCall("git_status", {root});
+    renderGit(data, preserveSelection && state.git.root === data.root);
+    const note = isDirty() ? " YURICH has an unsaved editor change; it is not included yet." : "";
+    gitStatusMessage(data.clean ? "Working tree is clean." + note : data.files.length + " changed file" + (data.files.length === 1 ? "." : "s.") + note, data.clean ? "ok" : "");
+  } catch (error) {
+    state.git.data = null;
+    state.git.selected.clear();
+    $("gitRoot").textContent = root;
+    $("gitFiles").replaceChildren(Object.assign(document.createElement("div"), {className:"git-empty", textContent:"Git status is unavailable."}));
+    gitStatusMessage(errorText(error), "error");
+  } finally {
+    setGitBusy(false);
+  }
+}
+
+function openGitView() {
+  if ($("gitView").classList.contains("active")) return closeGitView();
+  state.git.previousView = $("editor").classList.contains("active") ? "editor" : "search";
+  $("editor").classList.remove("active");
+  $("searchView").classList.add("hidden");
+  $("gitView").classList.add("active");
+  $("gitToggle").classList.add("terminal-active");
+  $("gitToggle").setAttribute("aria-expanded", "true");
+  refreshGitStatus(false);
+}
+
+function closeGitView() {
+  $("gitView").classList.remove("active");
+  $("gitToggle").classList.remove("terminal-active");
+  $("gitToggle").setAttribute("aria-expanded", "false");
+  if (state.git.previousView === "editor" && state.file) $("editor").classList.add("active");
+  else $("searchView").classList.remove("hidden");
+}
+
+async function commitSelectedFiles() {
+  const message = $("gitMessage").value.trim();
+  const files = [...state.git.selected];
+  if (!message || !files.length || state.git.busy) return;
+  setGitBusy(true);
+  gitStatusMessage("Creating local commit…", "", true);
+  $("gitOutput").hidden = true;
+  try {
+    const data = await rpcCall("git_commit", {root:state.root, files, message});
+    $("gitMessage").value = "";
+    persist();
+    $("gitOutput").textContent = data.output || "";
+    $("gitOutput").hidden = !data.output;
+    renderGit(data.repository, true);
+    gitStatusMessage("Committed " + data.commit + ".", "ok");
+  } catch (error) {
+    gitStatusMessage(errorText(error), "error");
+  } finally {
+    setGitBusy(false);
+  }
+}
+
+async function pushGit() {
+  if (state.git.busy) return;
+  setGitBusy(true);
+  gitStatusMessage("Pushing current branch…", "", true);
+  $("gitOutput").hidden = true;
+  try {
+    const data = await rpcCall("git_push", {root:state.root});
+    $("gitOutput").textContent = data.output || "";
+    $("gitOutput").hidden = false;
+    renderGit(data.repository, true);
+    gitStatusMessage("Push completed.", "ok");
+  } catch (error) {
+    gitStatusMessage(errorText(error), "error");
+  } finally {
+    setGitBusy(false);
+  }
+}
+
 function setTerminalOpen(open, save = true) {
   $("terminalPanel").hidden = !open;
   $("terminalToggle").classList.toggle("terminal-active", open);
@@ -991,6 +1172,17 @@ $("searchHistory").onchange = () => {
 $("searchMode").onchange = updateSearchMode;
 $("sidePanel").onclick = () => requestDisplayMode("fullscreen");
 $("terminalToggle").onclick = () => setTerminalOpen($("terminalPanel").hidden);
+$("gitToggle").onclick = openGitView;
+$("gitBack").onclick = closeGitView;
+$("gitRefresh").onclick = () => refreshGitStatus(true);
+$("gitCommit").onclick = commitSelectedFiles;
+$("gitPush").onclick = pushGit;
+$("gitSelectAll").onchange = () => {
+  state.git.selected = $("gitSelectAll").checked ? new Set((state.git.data?.files || []).map(file => file.path)) : new Set();
+  document.querySelectorAll(".git-file input").forEach(input => input.checked = $("gitSelectAll").checked);
+  updateGitActions();
+};
+$("gitMessage").addEventListener("input", () => { updateGitActions(); persist(); });
 $("terminalClose").onclick = () => setTerminalOpen(false);
 $("terminalClear").onclick = () => {
   $("terminalOutput").textContent = "";
@@ -1055,6 +1247,7 @@ document.addEventListener("keydown", event => {
   }
   if (event.key === "F3") {
     event.preventDefault();
+    if ($("gitView").classList.contains("active")) return;
     if ($("editor").classList.contains("active")) moveEditorMatch(event.shiftKey ? -1 : 1);
     else moveResultSelection(event.shiftKey ? -1 : 1);
   }
