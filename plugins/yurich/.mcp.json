@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "yurich": {
+      "command": "python",
+      "args": [
+        "C:\\Projects\\YURICH\\plugins\\yurich\\server\\yurich_mcp.py"
+      ]
+    }
+  }
+}

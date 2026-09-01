@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YURICH</title>
+<style>
+:root{color-scheme:light dark;--bg:#f7f7f5;--panel:#fff;--text:#171717;--muted:#707070;--line:#deded9;--soft:#efefeb;--accent:#1d4ed8;--match:#fff0a8;--danger:#b42318;--ok:#16803c;--shadow:0 12px 36px rgba(0,0,0,.10);--font-size:14px;--small-font:calc(var(--font-size) - 2px);--tiny-font:calc(var(--font-size) - 3px);--code-font:calc(var(--font-size) - 2px);--input-font:calc(var(--font-size) + 1px)}
+@media(prefers-color-scheme:dark){:root{--bg:#151515;--panel:#1d1d1d;--text:#ededed;--muted:#a3a3a3;--line:#393939;--soft:#292929;--accent:#7aa2ff;--match:#655600;--danger:#ff8b82;--ok:#62d78b;--shadow:0 14px 42px rgba(0,0,0,.42)}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:var(--font-size)}
+body{padding:14px}.app{max-width:1160px;margin:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+header{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}.logo{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--text);color:var(--panel);font-weight:800;font-size:calc(var(--font-size) - 1px)}.brand{font-weight:750;letter-spacing:.04em}.subtitle{color:var(--muted);font-size:var(--small-font)}.spacer{flex:1}.view-actions{display:flex;gap:5px}.icon-button{display:grid;place-items:center;width:32px;height:32px;padding:0;border-radius:8px}.icon-button svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.settings-wrap{position:relative}.settings-panel{position:absolute;z-index:20;right:0;top:38px;width:220px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}.settings-panel[hidden]{display:none}.setting-title{margin-bottom:10px;font-weight:700}.setting-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}.setting-row input{grid-column:1/-1;width:100%;accent-color:var(--accent)}.setting-value{color:var(--muted);font-size:var(--small-font)}
+button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:7px 11px;cursor:pointer}button:hover{background:var(--soft)}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--text);color:var(--panel);border-color:var(--text)}.primary:hover{opacity:.86;background:var(--text)}.danger{color:var(--danger)}
+.workspace{padding:14px 16px 16px}.row{display:flex;gap:8px;align-items:center}.folder-row{margin-bottom:10px}.folder{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--small-font)}.query{flex:1;min-width:0;border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:10px 12px;font-size:var(--input-font);outline:none}.query:focus,.folder:focus{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 16%,transparent)}
+.options{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:10px 1px 4px;color:var(--muted);font-size:var(--small-font)}.options label{display:flex;gap:5px;align-items:center}.glob{width:145px;border:0;border-bottom:1px solid var(--line);background:transparent;padding:3px}
+.status{min-height:28px;display:flex;align-items:center;gap:8px;padding:4px 1px;color:var(--muted);font-size:var(--small-font)}.status.error{color:var(--danger)}.status.ok{color:var(--ok)}.dot{width:7px;height:7px;border-radius:50%;background:currentColor}.spin{width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.empty{padding:55px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}.empty strong{display:block;color:var(--text);margin-bottom:6px}.results{border:1px solid var(--line);border-radius:10px;overflow:hidden}.file-group+.file-group{border-top:1px solid var(--line)}.file-head{display:flex;align-items:center;gap:8px;width:100%;border:0;border-radius:0;padding:9px 12px;background:var(--soft);text-align:left}.path{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--code-font);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.count{margin-left:auto;color:var(--muted);font-size:var(--tiny-font)}.match{display:grid;grid-template-columns:52px minmax(0,1fr);cursor:pointer}.match:hover{background:var(--soft)}.line-no{padding:5px 9px;text-align:right;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--tiny-font);user-select:none}.code{padding:5px 10px;white-space:pre;overflow:hidden;text-overflow:ellipsis;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--code-font)}.code mark{background:var(--match);color:inherit;border-radius:2px}
+.editor{display:none}.editor.active{display:block}.search-view.hidden{display:none}.editor-head{display:flex;gap:9px;align-items:center;padding-bottom:10px}.editor-path{font:600 var(--code-font) ui-monospace,SFMono-Regular,Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dirty{color:var(--danger);font-size:var(--tiny-font)}.conflict{display:none;margin-bottom:9px;padding:9px 11px;border:1px solid color-mix(in srgb,var(--danger) 45%,var(--line));background:color-mix(in srgb,var(--danger) 8%,transparent);border-radius:8px;color:var(--danger)}.conflict.show{display:flex;align-items:center;gap:10px}
+.editor-box{display:grid;grid-template-columns:auto 1fr;height:min(70vh,720px);border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--bg)}.gutter{margin:0;padding:12px 8px;min-width:44px;overflow:hidden;text-align:right;color:var(--muted);background:var(--soft);font:var(--code-font)/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;user-select:none}.source{width:100%;height:100%;resize:none;border:0;outline:0;padding:12px;overflow:auto;background:transparent;white-space:pre;tab-size:4;font:var(--code-font)/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
+.kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 4px;font-size:calc(var(--font-size) - 4px);color:var(--muted)}@media(max-width:650px){body{padding:0}.app{border:0;border-radius:0;min-height:100vh}.folder-row{align-items:stretch;flex-wrap:wrap}.folder{flex-basis:100%}.options{gap:8px}.glob{width:110px}.subtitle{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">Y</div>
+    <div><div class="brand">YURICH</div><div class="subtitle">Project Search &amp; Quick Edit</div></div>
+    <div class="spacer"></div>
+    <div class="view-actions" aria-label="View mode">
+      <div id="settingsWrap" class="settings-wrap">
+        <button id="settings" class="icon-button" type="button" title="Settings" aria-label="Open settings" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1z"></path></svg>
+        </button>
+        <div id="settingsPanel" class="settings-panel" hidden>
+          <div class="setting-title">Settings</div>
+          <label class="setting-row" for="fontSize">
+            <span>Font size</span><output id="fontSizeValue" class="setting-value">14 px</output>
+            <input id="fontSize" type="range" min="11" max="20" step="1" value="14">
+          </label>
+        </div>
+      </div>
+      <button id="sidePanel" class="icon-button" type="button" title="Open side panel" aria-label="Open side panel">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M15 4v16"></path></svg>
+      </button>
+    </div>
+  </header>
+  <main class="workspace">
+    <section id="searchView" class="search-view">
+      <div class="row folder-row">
+        <input id="root" class="folder" placeholder="C:\path\to\folder" aria-label="Folder">
+        <button id="browse">Browse…</button>
+        <button id="useRoot">Use folder</button>
+      </div>
+      <div class="row">
+        <input id="query" class="query" placeholder="Search text…" autocomplete="off">
+        <button id="search" class="primary">Search</button>
+      </div>
+      <div class="options">
+        <label><input id="caseSensitive" type="checkbox"> Match case</label>
+        <label><input id="wholeWord" type="checkbox"> Whole word</label>
+        <label><input id="regex" type="checkbox"> Regex</label>
+        <label>Files <input id="include" class="glob" placeholder="*.ts, *.py"></label>
+        <label>Exclude <input id="exclude" class="glob" placeholder="*.min.js"></label>
+      </div>
+      <div id="status" class="status">Choose any local folder to begin.</div>
+      <div id="output" class="empty"><strong>Fast local search</strong>Results stay on this computer. Click a match to edit the file.</div>
+    </section>
+    <section id="editor" class="editor">
+      <div class="editor-head">
+        <button id="back">← Results</button>
+        <div id="editorPath" class="editor-path"></div><span id="dirty" class="dirty"></span>
+        <div class="spacer"></div>
+        <span class="kbd">Ctrl S</span>
+        <button id="reload">Reload</button>
+        <button id="save" class="primary">Save</button>
+      </div>
+      <div id="conflict" class="conflict"><span>The file changed on disk.</span><div class="spacer"></div><button id="conflictReload">Reload disk version</button></div>
+      <div class="editor-box"><pre id="gutter" class="gutter">1</pre><textarea id="source" class="source" spellcheck="false" wrap="off"></textarea></div>
+      <div id="editorStatus" class="status"></div>
+    </section>
+  </main>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+const state = {root:"", file:"", original:"", metadata:null, line:1, busy:false, restored:false, persistTimer:null};
+const pending = new Map();
+let requestId = 1;
+
+function rpcCall(name, args = {}) {
+  if (window.openai && typeof window.openai.callTool === "function") {
+    return Promise.resolve(window.openai.callTool(name, args)).then(unwrap);
+  }
+  const id = requestId++;
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      pending.delete(id);
+      reject(new Error("The local tool did not respond."));
+    }, 300000);
+    pending.set(id, {resolve, reject, timer});
+    window.parent.postMessage({
+      jsonrpc:"2.0", id, method:"tools/call",
+      params:{name, arguments:args}
+    }, "*");
+  }).then(unwrap);
+}
+
+function unwrap(response) {
+  if (response && response.error) throw new Error(response.error.message || "Tool failed.");
+  const value = response && response.result ? response.result : response;
+  const data = value && (value.structuredContent || value);
+  if (value && value.isError) throw Object.assign(new Error(data.message || "Tool failed."), {data});
+  return data || {};
+}
+
+window.addEventListener("message", event => {
+  const message = event.data;
+  if (!message || message.jsonrpc !== "2.0") return;
+  if (message.id != null && pending.has(message.id)) {
+    const item = pending.get(message.id);
+    pending.delete(message.id);
+    clearTimeout(item.timer);
+    message.error ? item.reject(new Error(message.error.message)) : item.resolve(message.result);
+    return;
+  }
+  if (message.method === "ui/notifications/tool-result") {
+    applyInitial(message.params && (message.params.result || message.params));
+  }
+  if (message.method === "ui/notifications/tool-input") {
+    const args = message.params && (message.params.arguments || message.params);
+    if (args && args.root) setRoot(args.root, false);
+  }
+});
+
+function applyInitial(raw) {
+  const data = raw && (raw.structuredContent || raw);
+  if (!data) return;
+  if (data.savedState) {
+    const saved = {...data.savedState};
+    if (data.root) saved.root = data.root;
+    restoreState(saved, true);
+  } else if (data.root) {
+    setRoot(data.root, false);
+  }
+}
+
+function status(text, kind = "", loading = false) {
+  $("status").className = "status " + kind;
+  $("status").replaceChildren();
+  if (loading) $("status").append(Object.assign(document.createElement("span"), {className:"spin"}));
+  else if (kind) $("status").append(Object.assign(document.createElement("span"), {className:"dot"}));
+  $("status").append(document.createTextNode(text));
+}
+
+function editorStatus(text, kind = "", loading = false) {
+  $("editorStatus").className = "status " + kind;
+  $("editorStatus").replaceChildren();
+  if (loading) $("editorStatus").append(Object.assign(document.createElement("span"), {className:"spin"}));
+  $("editorStatus").append(document.createTextNode(text));
+}
+
+function errorText(error) {
+  return (error && error.data && error.data.message) || (error && error.message) || String(error);
+}
+
+async function requestDisplayMode(mode) {
+  if (!window.openai || typeof window.openai.requestDisplayMode !== "function") {
+    status("This Codex version does not support changing the view mode.", "error");
+    return;
+  }
+  try {
+    await window.openai.requestDisplayMode({mode});
+  } catch (error) {
+    status(errorText(error), "error");
+  }
+}
+
+function setBusy(value) {
+  state.busy = value;
+  ["browse","useRoot","search","reload","save"].forEach(id => $(id).disabled = value);
+}
+
+function stateSnapshot() {
+  return {
+    root:$("root").value.trim(),
+    query:$("query").value,
+    caseSensitive:$("caseSensitive").checked,
+    wholeWord:$("wholeWord").checked,
+    regex:$("regex").checked,
+    include:$("include").value,
+    exclude:$("exclude").value,
+    fontSize:Number($("fontSize").value)
+  };
+}
+
+function applyFontSize(value) {
+  const size = Math.min(20, Math.max(11, Number(value) || 14));
+  $("fontSize").value = String(size);
+  $("fontSizeValue").value = size + " px";
+  document.documentElement.style.setProperty("--font-size", size + "px");
+}
+
+function persist() {
+  const saved = stateSnapshot();
+  if (window.openai && typeof window.openai.setWidgetState === "function") {
+    window.openai.setWidgetState(saved);
+  }
+  clearTimeout(state.persistTimer);
+  state.persistTimer = setTimeout(() => {
+    rpcCall("save_state", {state:saved}).catch(() => {});
+  }, 250);
+}
+
+function restoreState(saved, autoSearch = false) {
+  if (state.restored || !saved || typeof saved !== "object") return;
+  state.restored = true;
+  $("root").value = typeof saved.root === "string" ? saved.root : "";
+  $("query").value = typeof saved.query === "string" ? saved.query : "";
+  $("caseSensitive").checked = saved.caseSensitive === true;
+  $("wholeWord").checked = saved.wholeWord === true;
+  $("regex").checked = saved.regex === true;
+  $("include").value = typeof saved.include === "string" ? saved.include : "";
+  $("exclude").value = typeof saved.exclude === "string" ? saved.exclude : "";
+  applyFontSize(saved.fontSize);
+  state.root = $("root").value;
+  if (state.root && $("query").value && autoSearch) {
+    status("Restoring the last search…", "", true);
+    setTimeout(search, 80);
+  } else if (state.root) {
+    status("Restored folder: " + state.root, "ok");
+  }
+}
+
+function setRoot(root, announce = true) {
+  state.root = root || "";
+  $("root").value = state.root;
+  persist();
+  if (announce && root) status("Folder ready: " + root, "ok");
+}
+
+async function validateRoot() {
+  const root = $("root").value.trim();
+  if (!root) return status("Enter or browse to a folder.", "error");
+  setBusy(true); status("Checking folder…", "", true);
+  try {
+    const data = await rpcCall("validate_root", {root});
+    setRoot(data.root);
+  } catch (error) {
+    status(errorText(error), "error");
+  } finally { setBusy(false); }
+}
+
+async function browse() {
+  setBusy(true); status("Waiting for folder selection…", "", true);
+  try {
+    const data = await rpcCall("choose_folder", {});
+    if (data.status === "cancelled") status("Folder selection cancelled.");
+    else if (data.status === "unsupported") status(data.message, "error");
+    else { setRoot(data.root); }
+  } catch (error) {
+    status(errorText(error) + " You can paste the path manually.", "error");
+  } finally { setBusy(false); }
+}
+
+function patterns(value) {
+  return value.split(",").map(item => item.trim()).filter(Boolean);
+}
+
+function markLine(container, text, start, end) {
+  if (!start || end <= start) {
+    container.textContent = text;
+    return;
+  }
+  container.append(document.createTextNode(text.slice(0, start - 1)));
+  const mark = document.createElement("mark");
+  mark.textContent = text.slice(start - 1, end - 1);
+  container.append(mark, document.createTextNode(text.slice(end - 1)));
+}
+
+function renderResults(data) {
+  const output = $("output");
+  output.className = data.count ? "results" : "empty";
+  output.replaceChildren();
+  if (!data.count) {
+    const strong = document.createElement("strong");
+    strong.textContent = "No matches";
+    output.append(strong, document.createTextNode("Try another query or widen the file filters."));
+    return;
+  }
+  for (const group of data.groups || []) {
+    const section = document.createElement("section");
+    section.className = "file-group";
+    const head = document.createElement("button");
+    head.className = "file-head";
+    const path = Object.assign(document.createElement("span"), {className:"path", textContent:group.path});
+    const count = Object.assign(document.createElement("span"), {className:"count", textContent:group.matches.length + (group.matches.length === 1 ? " match" : " matches")});
+    head.append(path, count);
+    head.onclick = () => openFile(group.path, group.matches[0].lineNumber);
+    section.append(head);
+    for (const item of group.matches) {
+      const context = item.context && item.context.length ? item.context : [{lineNumber:item.lineNumber,text:item.text,isMatch:true}];
+      for (const row of context) {
+        const match = document.createElement("div");
+        match.className = "match";
+        match.onclick = () => openFile(group.path, item.lineNumber);
+        const no = Object.assign(document.createElement("div"), {className:"line-no", textContent:row.lineNumber});
+        const code = Object.assign(document.createElement("div"), {className:"code"});
+        if (row.isMatch) markLine(code, row.text, item.column, item.endColumn);
+        else code.textContent = row.text;
+        match.append(no, code);
+        section.append(match);
+      }
+    }
+    output.append(section);
+  }
+}
+
+async function search() {
+  let root = $("root").value.trim();
+  const query = $("query").value;
+  if (!root) return status("Choose a folder first.", "error");
+  if (!query) return status("Enter text to search for.", "error");
+  setBusy(true); status("Searching…", "", true);
+  try {
+    if (root !== state.root) {
+      const checked = await rpcCall("validate_root", {root});
+      root = checked.root; setRoot(root, false);
+    }
+    const data = await rpcCall("search_project", {
+      root, query,
+      caseSensitive:$("caseSensitive").checked,
+      wholeWord:$("wholeWord").checked,
+      regex:$("regex").checked,
+      includeGlobs:patterns($("include").value),
+      excludeGlobs:patterns($("exclude").value),
+      maxResults:500
+    });
+    renderResults(data);
+    status(data.count + " matches · " + data.engine + (data.truncated ? " · first 500 shown" : ""), "ok");
+    persist();
+  } catch (error) {
+    status(errorText(error), "error");
+  } finally { setBusy(false); }
+}
+
+function updateGutter() {
+  const lines = $("source").value.split("\n").length;
+  $("gutter").textContent = Array.from({length:lines}, (_, index) => index + 1).join("\n");
+  $("dirty").textContent = $("source").value !== state.original ? "● unsaved" : "";
+}
+
+function syncScroll() { $("gutter").scrollTop = $("source").scrollTop; }
+
+function focusLine(line) {
+  const source = $("source");
+  let start = 0;
+  const pieces = source.value.split("\n");
+  for (let index = 0; index < Math.max(0, line - 1); index++) start += pieces[index].length + 1;
+  source.focus();
+  source.setSelectionRange(start, start + (pieces[line - 1] || "").length);
+  const lineHeight = parseFloat(getComputedStyle(source).lineHeight) || 18;
+  source.scrollTop = Math.max(0, (line - 4) * lineHeight);
+  syncScroll();
+}
+
+async function openFile(path, line = 1) {
+  setBusy(true); status("Opening " + path + "…", "", true);
+  try {
+    const data = await rpcCall("read_file", {root:state.root, path});
+    state.file = path; state.original = data.content; state.metadata = data.metadata; state.line = line;
+    $("editorPath").textContent = path;
+    $("source").value = data.content;
+    $("conflict").classList.remove("show");
+    updateGutter();
+    status("Opened " + path + ".", "ok");
+    $("searchView").classList.add("hidden");
+    $("editor").classList.add("active");
+    editorStatus(data.metadata.lineCount + " lines · " + data.metadata.lineEnding + " · UTF-8");
+    requestAnimationFrame(() => focusLine(line));
+  } catch (error) {
+    status(errorText(error), "error");
+  } finally { setBusy(false); }
+}
+
+function backToResults() {
+  if ($("source").value !== state.original && !confirm("Discard unsaved edits?")) return;
+  $("editor").classList.remove("active");
+  $("searchView").classList.remove("hidden");
+}
+
+async function reloadFile() {
+  if (!state.file) return;
+  setBusy(true); editorStatus("Reloading…", "", true);
+  try {
+    const data = await rpcCall("read_file", {root:state.root, path:state.file});
+    state.original = data.content; state.metadata = data.metadata;
+    $("source").value = data.content;
+    $("conflict").classList.remove("show");
+    updateGutter(); editorStatus("Reloaded from disk.", "ok");
+  } catch (error) { editorStatus(errorText(error), "error"); }
+  finally { setBusy(false); }
+}
+
+async function saveFile() {
+  if (!state.file || !state.metadata) return;
+  setBusy(true); editorStatus("Saving…", "", true);
+  try {
+    const data = await rpcCall("save_file", {
+      root:state.root, path:state.file, content:$("source").value,
+      expectedVersion:{
+        size:state.metadata.size, mtimeNs:state.metadata.mtimeNs, sha256:state.metadata.sha256
+      }
+    });
+    if (data.status === "conflict") {
+      $("conflict").classList.add("show");
+      return editorStatus("Save stopped: file changed on disk.", "error");
+    }
+    state.original = $("source").value; state.metadata = {...state.metadata, ...data.metadata};
+    $("conflict").classList.remove("show");
+    updateGutter(); editorStatus("Saved to disk.", "ok");
+  } catch (error) {
+    if (error.data && error.data.status === "conflict") $("conflict").classList.add("show");
+    editorStatus(errorText(error), "error");
+  } finally { setBusy(false); }
+}
+
+$("browse").onclick = browse;
+$("useRoot").onclick = validateRoot;
+$("search").onclick = search;
+$("sidePanel").onclick = () => requestDisplayMode("fullscreen");
+$("settings").onclick = () => {
+  const panel = $("settingsPanel");
+  panel.hidden = !panel.hidden;
+  $("settings").setAttribute("aria-expanded", String(!panel.hidden));
+};
+$("back").onclick = backToResults;
+$("reload").onclick = reloadFile;
+$("conflictReload").onclick = reloadFile;
+$("save").onclick = saveFile;
+$("source").addEventListener("input", updateGutter);
+$("source").addEventListener("scroll", syncScroll);
+$("source").addEventListener("keydown", event => {
+  if (event.key === "Tab") {
+    event.preventDefault();
+    const source = $("source"), start = source.selectionStart, end = source.selectionEnd;
+    source.setRangeText("  ", start, end, "end"); updateGutter();
+  }
+});
+$("query").addEventListener("keydown", event => { if (event.key === "Enter") search(); });
+$("root").addEventListener("keydown", event => { if (event.key === "Enter") validateRoot(); });
+document.addEventListener("keydown", event => {
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s" && $("editor").classList.contains("active")) {
+    event.preventDefault(); saveFile();
+  }
+});
+
+["root","query","include","exclude"].forEach(id => $(id).addEventListener("input", persist));
+["caseSensitive","wholeWord","regex"].forEach(id => $(id).addEventListener("change", persist));
+$("fontSize").addEventListener("input", () => {
+  applyFontSize($("fontSize").value);
+  persist();
+});
+document.addEventListener("click", event => {
+  if (!$("settingsWrap").contains(event.target)) {
+    $("settingsPanel").hidden = true;
+    $("settings").setAttribute("aria-expanded", "false");
+  }
+});
+
+applyFontSize(14);
+if (window.openai && window.openai.widgetState) restoreState(window.openai.widgetState, true);
+setTimeout(async () => {
+  if (state.restored) return;
+  try {
+    const data = await rpcCall("load_state", {});
+    restoreState(data.state, true);
+  } catch (_) {}
+}, 120);
+</script>
+</body>
+</html>

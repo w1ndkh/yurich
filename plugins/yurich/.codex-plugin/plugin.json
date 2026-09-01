@@ -1,0 +1,33 @@
+{
+  "name": "yurich",
+  "version": "0.1.0+codex.20260901101705",
+  "description": "Fast local project search, preview, and manual file editing.",
+  "author": {
+    "name": "Yurii Ray"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "search",
+    "editor",
+    "files",
+    "developer-tools"
+  ],
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "YURICH",
+    "shortDescription": "Project Search & Quick Edit",
+    "longDescription": "Search a chosen local folder, inspect matching code, edit files, and save changes directly to disk.",
+    "developerName": "Yurii Ray",
+    "category": "Productivity",
+    "capabilities": [
+      "Search",
+      "Read",
+      "Write",
+      "Interactive"
+    ],
+    "defaultPrompt": [
+      "Open YURICH"
+    ],
+    "brandColor": "#6B7280"
+  }
+}
