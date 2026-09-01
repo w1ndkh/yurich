@@ -8,13 +8,14 @@ from pathlib import Path
 from typing import Any
 
 from filesystem_ops import YurichError, choose_folder, read_file, save_file, validate_root
-from search_ops import search_project
+from search_ops import search_files, search_project
 from state_ops import load_state, save_state
 
 VERSION = "0.1.0"
-UI_URI = "ui://yurich/main-v4.html"
+UI_URI = "ui://yurich/main-v5.html"
 UI_URIS = (
     UI_URI,
+    "ui://yurich/main-v4.html",
     "ui://yurich/main-v3.html",
     "ui://yurich/main-v2.html",
     "ui://yurich/main-v1.html",
@@ -96,6 +97,23 @@ TOOLS = [
             "includeGlobs": {"type": ["string", "array"], "items": {"type": "string"}},
             "excludeGlobs": {"type": ["string", "array"], "items": {"type": "string"}},
             "maxResults": {"type": "integer", "minimum": 1, "maximum": 2000, "default": 500},
+            "contextLines": {"type": "integer", "minimum": 0, "maximum": 10, "default": 2},
+        }, ["root", "query"]),
+        "annotations": {"readOnlyHint": True, "openWorldHint": False},
+        "_meta": {"openai/widgetAccessible": True},
+    },
+    {
+        "name": "search_files", "title": "Search file names",
+        "description": "Find files by name or relative path within the selected folder.",
+        "inputSchema": schema({
+            "root": ROOT,
+            "query": {"type": "string"},
+            "caseSensitive": {"type": "boolean", "default": False},
+            "regex": {"type": "boolean", "default": False},
+            "wholeWord": {"type": "boolean", "default": False},
+            "includeGlobs": {"type": ["string", "array"], "items": {"type": "string"}},
+            "excludeGlobs": {"type": ["string", "array"], "items": {"type": "string"}},
+            "maxResults": {"type": "integer", "minimum": 1, "maximum": 2000, "default": 500},
         }, ["root", "query"]),
         "annotations": {"readOnlyHint": True, "openWorldHint": False},
         "_meta": {"openai/widgetAccessible": True},
@@ -143,6 +161,7 @@ HANDLERS = {
     "validate_root": validate_root,
     "choose_folder": choose_folder,
     "search_project": search_project,
+    "search_files": search_files,
     "load_state": load_state,
     "save_state": save_state,
     "read_file": read_file,

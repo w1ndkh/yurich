@@ -80,6 +80,7 @@ def _rg_search(
     includes: list[str],
     excludes: list[str],
     max_results: int,
+    context_lines: int,
 ) -> tuple[list[dict[str, Any]], bool] | None:
     rg = shutil.which("rg")
     if not rg:
@@ -151,7 +152,7 @@ def _rg_search(
             try:
                 if path not in line_cache:
                     line_cache[path] = read_utf8(path)[0].splitlines()
-                context = _context(line_cache[path], line_number)
+                context = _context(line_cache[path], line_number, context_lines)
             except YurichError:
                 context = [{"lineNumber": line_number, "text": line_text, "isMatch": True}]
             matches.append(
@@ -196,6 +197,8 @@ def _candidate_files(root: Path) -> Iterable[Path]:
                     if not raw:
                         continue
                     relative = raw.decode("utf-8", errors="surrogateescape")
+                    if any(part in DEFAULT_IGNORES for part in Path(relative).parts):
+                        continue
                     path = (root / relative).resolve()
                     if is_within(root, path) and path.is_file():
                         yield path
@@ -225,6 +228,7 @@ def _fallback_search(
     includes: list[str],
     excludes: list[str],
     max_results: int,
+    context_lines: int,
 ) -> tuple[list[dict[str, Any]], bool]:
     flags = 0 if case_sensitive else re.IGNORECASE
     expression = query if regex else re.escape(query)
@@ -257,7 +261,7 @@ def _fallback_search(
                     "column": found.start() + 1,
                     "endColumn": found.end() + 1,
                     "text": line,
-                    "context": _context(lines, line_number),
+                    "context": _context(lines, line_number, context_lines),
                 }
             )
             if len(matches) >= max_results:
@@ -273,6 +277,8 @@ def search_project(arguments: dict[str, Any]) -> dict[str, Any]:
         raise YurichError("Enter text to search for.")
     max_results = int(arguments.get("maxResults") or 500)
     max_results = max(1, min(max_results, 2000))
+    context_lines = int(arguments.get("contextLines", 2))
+    context_lines = max(0, min(context_lines, 10))
     options = {
         "case_sensitive": bool(arguments.get("caseSensitive", False)),
         "regex": bool(arguments.get("regex", False)),
@@ -280,6 +286,7 @@ def search_project(arguments: dict[str, Any]) -> dict[str, Any]:
         "includes": _patterns(arguments.get("includeGlobs")),
         "excludes": _patterns(arguments.get("excludeGlobs")),
         "max_results": max_results,
+        "context_lines": context_lines,
     }
     found = _rg_search(root, query, **options)
     if found is None:
@@ -296,4 +303,47 @@ def search_project(arguments: dict[str, Any]) -> dict[str, Any]:
         "truncated": truncated,
         "results": matches,
         "groups": _group(matches),
+    }
+
+
+def search_files(arguments: dict[str, Any]) -> dict[str, Any]:
+    root = canonical_root(str(arguments.get("root") or ""))
+    query = str(arguments.get("query") or "").strip()
+    if not query:
+        raise YurichError("Enter a file name to search for.")
+    max_results = max(1, min(int(arguments.get("maxResults") or 500), 2000))
+    case_sensitive = bool(arguments.get("caseSensitive", False))
+    whole_word = bool(arguments.get("wholeWord", False))
+    regex = bool(arguments.get("regex", False))
+    includes = _patterns(arguments.get("includeGlobs"))
+    excludes = _patterns(arguments.get("excludeGlobs"))
+    expression = query if regex else re.escape(query)
+    if whole_word:
+        expression = rf"\b(?:{expression})\b"
+    try:
+        matcher = re.compile(expression, 0 if case_sensitive else re.IGNORECASE)
+    except re.error as error:
+        raise YurichError(f"Invalid regular expression: {error}") from error
+
+    files: list[str] = []
+    truncated = False
+    for path in _candidate_files(root):
+        relative = path.relative_to(root).as_posix()
+        if not _matches_patterns(relative, includes, excludes):
+            continue
+        if not matcher.search(path.name) and not matcher.search(relative):
+            continue
+        files.append(relative)
+        if len(files) >= max_results:
+            truncated = True
+            break
+    files.sort(key=str.casefold)
+    return {
+        "root": str(root),
+        "query": query,
+        "engine": "filesystem",
+        "mode": "files",
+        "count": len(files),
+        "truncated": truncated,
+        "files": files,
     }

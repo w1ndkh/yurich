@@ -17,7 +17,16 @@ STRING_LIMITS = {
     "exclude": 2048,
 }
 BOOL_KEYS = {"caseSensitive", "wholeWord", "regex"}
-INTEGER_LIMITS = {"fontSize": (11, 20)}
+INTEGER_LIMITS = {"fontSize": (11, 20), "contextLines": (0, 10)}
+ENUM_VALUES = {
+    "theme": {"auto", "light", "dark"},
+    "searchMode": {"content", "filename"},
+}
+ARRAY_LIMITS = {
+    "searchHistory": (30, 4096),
+    "recentFolders": (12, 4096),
+    "favoriteFolders": (30, 4096),
+}
 
 
 def state_directory() -> Path:
@@ -55,6 +64,23 @@ def sanitize_state(value: Any) -> dict[str, Any]:
         item = value.get(key)
         if isinstance(item, int) and not isinstance(item, bool):
             clean[key] = min(maximum, max(minimum, item))
+    for key, allowed in ENUM_VALUES.items():
+        item = value.get(key)
+        if isinstance(item, str) and item in allowed:
+            clean[key] = item
+    for key, (maximum_items, maximum_length) in ARRAY_LIMITS.items():
+        item = value.get(key)
+        if isinstance(item, list):
+            values: list[str] = []
+            for entry in item:
+                if not isinstance(entry, str):
+                    continue
+                entry = entry.strip()[:maximum_length]
+                if entry and entry not in values:
+                    values.append(entry)
+                if len(values) >= maximum_items:
+                    break
+            clean[key] = values
     return clean
 
 

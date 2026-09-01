@@ -12,7 +12,7 @@ PLUGIN_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PLUGIN_ROOT / "server"))
 
 from filesystem_ops import YurichError, read_file, save_file  # noqa: E402
-from search_ops import search_project  # noqa: E402
+from search_ops import search_files, search_project  # noqa: E402
 from state_ops import load_state, save_state  # noqa: E402
 
 
@@ -58,17 +58,25 @@ class FilesystemTests(unittest.TestCase):
         with self.assertRaises(YurichError):
             read_file({"root": str(self.root), "path": "../outside.txt"})
 
+    def test_context_radius_and_file_name_search(self) -> None:
+        found = search_project({"root": str(self.root), "query": "needle", "contextLines": 0})
+        self.assertEqual(len(found["results"][0]["context"]), 1)
+        files = search_files({"root": str(self.root), "query": "hello"})
+        self.assertEqual(files["mode"], "files")
+        self.assertEqual(files["files"], ["src/hello.py"])
+
 
 class McpTests(unittest.TestCase):
     def test_server_lists_tools_and_ui(self) -> None:
         requests = [
             {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-06-18"}},
             {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}},
-            {"jsonrpc": "2.0", "id": 3, "method": "resources/read", "params": {"uri": "ui://yurich/main-v4.html"}},
-            {"jsonrpc": "2.0", "id": 4, "method": "resources/read", "params": {"uri": "ui://yurich/main-v3.html"}},
-            {"jsonrpc": "2.0", "id": 5, "method": "resources/read", "params": {"uri": "ui://yurich/main-v2.html"}},
-            {"jsonrpc": "2.0", "id": 6, "method": "resources/read", "params": {"uri": "ui://yurich/main-v1.html"}},
-            {"jsonrpc": "2.0", "id": 7, "method": "resources/read", "params": {"uri": "ui://yurich/missing.html"}},
+            {"jsonrpc": "2.0", "id": 3, "method": "resources/read", "params": {"uri": "ui://yurich/main-v5.html"}},
+            {"jsonrpc": "2.0", "id": 4, "method": "resources/read", "params": {"uri": "ui://yurich/main-v4.html"}},
+            {"jsonrpc": "2.0", "id": 5, "method": "resources/read", "params": {"uri": "ui://yurich/main-v3.html"}},
+            {"jsonrpc": "2.0", "id": 6, "method": "resources/read", "params": {"uri": "ui://yurich/main-v2.html"}},
+            {"jsonrpc": "2.0", "id": 7, "method": "resources/read", "params": {"uri": "ui://yurich/main-v1.html"}},
+            {"jsonrpc": "2.0", "id": 8, "method": "resources/read", "params": {"uri": "ui://yurich/missing.html"}},
         ]
         completed = subprocess.run(
             [sys.executable, str(PLUGIN_ROOT / "server" / "yurich_mcp.py")],
@@ -85,28 +93,35 @@ class McpTests(unittest.TestCase):
             names,
             {
                 "open_yurich", "validate_root", "choose_folder", "search_project",
-                "load_state", "save_state", "read_file", "save_file",
+                "search_files", "load_state", "save_state", "read_file", "save_file",
             },
         )
         content = replies[2]["result"]["contents"][0]
-        self.assertEqual(content["uri"], "ui://yurich/main-v4.html")
+        self.assertEqual(content["uri"], "ui://yurich/main-v5.html")
         self.assertEqual(content["mimeType"], "text/html;profile=mcp-app")
         self.assertIn('method:"tools/call"', content["text"])
         self.assertIn('requestDisplayMode("fullscreen")', content["text"])
         self.assertIn('id="settings"', content["text"])
         self.assertIn('id="fontSize"', content["text"])
+        self.assertIn('id="contextLines"', content["text"])
+        self.assertIn('id="searchMode"', content["text"])
+        self.assertIn('id="favoriteFolders"', content["text"])
+        self.assertIn('id="findVariable"', content["text"])
         self.assertNotIn('requestDisplayMode("pip")', content["text"])
         compatibility_content = replies[3]["result"]["contents"][0]
-        self.assertEqual(compatibility_content["uri"], "ui://yurich/main-v3.html")
+        self.assertEqual(compatibility_content["uri"], "ui://yurich/main-v4.html")
         self.assertEqual(compatibility_content["text"], content["text"])
         older_content = replies[4]["result"]["contents"][0]
-        self.assertEqual(older_content["uri"], "ui://yurich/main-v2.html")
+        self.assertEqual(older_content["uri"], "ui://yurich/main-v3.html")
         self.assertEqual(older_content["text"], content["text"])
         legacy_content = replies[5]["result"]["contents"][0]
-        self.assertEqual(legacy_content["uri"], "ui://yurich/main-v1.html")
+        self.assertEqual(legacy_content["uri"], "ui://yurich/main-v2.html")
         self.assertEqual(legacy_content["text"], content["text"])
-        self.assertNotIn("result", replies[6])
-        self.assertEqual(replies[6]["error"]["code"], -32000)
+        oldest_content = replies[6]["result"]["contents"][0]
+        self.assertEqual(oldest_content["uri"], "ui://yurich/main-v1.html")
+        self.assertEqual(oldest_content["text"], content["text"])
+        self.assertNotIn("result", replies[7])
+        self.assertEqual(replies[7]["error"]["code"], -32000)
 
 
 class StateTests(unittest.TestCase):
@@ -124,6 +139,12 @@ class StateTests(unittest.TestCase):
                     "include": "*.css",
                     "exclude": "*.min.css",
                     "fontSize": 17,
+                    "contextLines": 4,
+                    "theme": "dark",
+                    "searchMode": "filename",
+                    "searchHistory": [".hero-text", "home.css"],
+                    "recentFolders": [r"C:\Projects\Video", r"C:\Projects\YURICH"],
+                    "favoriteFolders": [r"C:\Projects\Video"],
                 }
                 self.assertEqual(save_state({"state": saved})["status"], "success")
                 self.assertEqual(load_state({})["state"], saved)

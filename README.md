@@ -19,14 +19,18 @@ not a bulk refactoring tool and it never edits search results automatically.
   fallback.
 - **Useful filters** for case sensitivity, whole words, regular expressions,
   included file globs, and excluded file globs.
+- **File-name search** for locating a file by its name or relative path without
+  searching its contents.
 - **Readable results** grouped by file, with matching text highlighted and
-  nearby lines shown for context.
+  a configurable number of nearby lines shown for context.
 - **Inline editor** with line numbers, match navigation, tab insertion, reload,
   and `Ctrl+S` saving.
+- **CSS variable lookup** that finds the declaration of the custom property
+  under the editor cursor or inside the current selection.
 - **Conflict protection** that stops a save when the file has changed on disk
-  since it was opened.
-- **Persistent workspace** that remembers the selected folder, the last query,
-  search filters, and the preferred editor font size.
+  since it was opened, plus warnings before unsaved edits are discarded.
+- **Persistent workspace** with search history, recent folders, favorite
+  folders, filters, context size, theme, and preferred editor font size.
 - **Flexible layout** that can remain inside the task or open in the Codex side
   panel.
 
@@ -39,8 +43,9 @@ not a bulk refactoring tool and it never edits search results automatically.
 5. Select a result to open the file.
 6. Make a small edit and save it with **Save** or `Ctrl+S`.
 
-The settings button in the header controls the editor font size. Search state
-and preferences are restored the next time the interface opens.
+The settings button controls the editor font size, context line count, and
+light/dark/system theme. Fresh installations start with common minified files
+and source maps excluded; the exclusion field remains editable.
 
 ## Safety model
 
