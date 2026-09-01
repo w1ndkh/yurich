@@ -51,22 +51,30 @@ not a bulk refactoring tool and it never edits search results automatically.
 
 <img src="./docs/screenshots/search.png" alt="YURICH project search results" width="100%">
 
+---
+
 ### Quick editor
 
 <img src="./docs/screenshots/editor.png" alt="Editing a local file in YURICH" width="100%">
+
+---
 
 ### Preferences and saved folders
 
 <img src="./docs/screenshots/settings.png" alt="YURICH settings, recent folders, and favorites" width="100%">
 
+---
+
 ### Project console
 
 <img src="./docs/screenshots/terminal.png" alt="YURICH project console running a local command" width="100%">
 
+---
+
 ## Typical workflow
 
 1. Start a new Codex task after installing or updating the plugin.
-2. Ask `Open YURICH` or `Открой YURICH`.
+2. Ask `Open YURICH` or `Відкрий YURICH`.
 3. Enter an absolute folder path, or select one with **Browse…**.
 4. Choose **Use folder**, enter a query, and select **Search**.
 5. Select a result to open the file.
@@ -111,14 +119,14 @@ server, although the current installation flow is primarily tested on Windows.
 ## Local installation
 
 1. Clone or copy this repository to a permanent folder.
+
 2. Open `.mcp.json` and set the Python script path to the absolute location of
    `server/yurich_mcp.py` on your computer.
-3. From the repository root, add its local marketplace:
 
+3. From the repository root, add its local marketplace:
    `codex plugin marketplace add .`
 
 4. Install YURICH:
-
    `codex plugin add yurich@personal`
 
 5. Open a new Codex task so the updated MCP server and interface are loaded.
@@ -161,3 +169,7 @@ python <path-to-plugin-creator>/scripts/validate_plugin.py plugins/yurich
 
 YURICH is licensed under the [Apache License 2.0](LICENSE). You may use, modify,
 and redistribute it under the terms of that license.
+
+
+
+
