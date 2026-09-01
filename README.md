@@ -1,6 +1,14 @@
-# YURICH
+<p align="center">
+  <img src="./plugins/yurich/assets/logo.jpg" alt="YURICH" width="620">
+</p>
 
-**Fast local search and careful manual editing for Codex.**
+<p align="center">
+  <strong>Fast local search and careful manual editing for Codex.</strong>
+</p>
+
+<p align="center">
+  Search any local folder, inspect matching code, and make focused edits without leaving Codex.
+</p>
 
 YURICH is a small local Codex plugin that lets you choose any folder on your
 computer, search its text files, inspect the surrounding code, and make focused
@@ -33,6 +41,20 @@ not a bulk refactoring tool and it never edits search results automatically.
   folders, filters, context size, theme, and preferred editor font size.
 - **Flexible layout** that can remain inside the task or open in the Codex side
   panel.
+
+## Screenshots
+
+### Project search
+
+<img src="./docs/screenshots/search.png" alt="YURICH project search results" width="100%">
+
+### Quick editor
+
+<img src="./docs/screenshots/editor.png" alt="Editing a local file in YURICH" width="100%">
+
+### Preferences and saved folders
+
+<img src="./docs/screenshots/settings.png" alt="YURICH settings, recent folders, and favorites" width="100%">
 
 ## Typical workflow
 
