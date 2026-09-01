@@ -165,7 +165,7 @@ class GitTests(unittest.TestCase):
 
 class McpTests(unittest.TestCase):
     def test_server_lists_tools_and_ui(self) -> None:
-        ui_uris = [f"ui://yurich/main-v{version}.html" for version in range(11, 0, -1)]
+        ui_uris = [f"ui://yurich/main-v{version}.html" for version in range(14, 0, -1)]
         requests = [
             {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-06-18"}},
             {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}},
@@ -197,7 +197,7 @@ class McpTests(unittest.TestCase):
             },
         )
         content = replies[2]["result"]["contents"][0]
-        self.assertEqual(content["uri"], "ui://yurich/main-v11.html")
+        self.assertEqual(content["uri"], "ui://yurich/main-v14.html")
         self.assertEqual(content["mimeType"], "text/html;profile=mcp-app")
         self.assertIn('method:"tools/call"', content["text"])
         self.assertIn('requestDisplayMode("fullscreen")', content["text"])
@@ -207,6 +207,9 @@ class McpTests(unittest.TestCase):
         self.assertIn('id="afterContextLines"', content["text"])
         self.assertIn('id="searchMode"', content["text"])
         self.assertIn('id="favoriteFolders"', content["text"])
+        self.assertIn('id="favoriteStar"', content["text"])
+        self.assertIn('class="folder-picker"', content["text"])
+        self.assertIn('id="folderIndent"', content["text"])
         self.assertIn('id="findVariable"', content["text"])
         self.assertIn('id="terminalPanel"', content["text"])
         self.assertIn('id="terminalInput"', content["text"])

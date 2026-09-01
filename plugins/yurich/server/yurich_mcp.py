@@ -14,9 +14,12 @@ from state_ops import load_state, save_state
 from terminal_ops import list_package_scripts, poll_command, start_command, stop_command
 
 VERSION = "0.1.0"
-UI_URI = "ui://yurich/main-v11.html"
+UI_URI = "ui://yurich/main-v14.html"
 UI_URIS = (
     UI_URI,
+    "ui://yurich/main-v13.html",
+    "ui://yurich/main-v12.html",
+    "ui://yurich/main-v11.html",
     "ui://yurich/main-v10.html",
     "ui://yurich/main-v9.html",
     "ui://yurich/main-v8.html",
