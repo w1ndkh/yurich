@@ -14,9 +14,10 @@ from state_ops import load_state, save_state
 from terminal_ops import list_package_scripts, poll_command, start_command, stop_command
 
 VERSION = "0.1.0"
-UI_URI = "ui://yurich/main-v10.html"
+UI_URI = "ui://yurich/main-v11.html"
 UI_URIS = (
     UI_URI,
+    "ui://yurich/main-v10.html",
     "ui://yurich/main-v9.html",
     "ui://yurich/main-v8.html",
     "ui://yurich/main-v7.html",
@@ -105,6 +106,8 @@ TOOLS = [
             "excludeGlobs": {"type": ["string", "array"], "items": {"type": "string"}},
             "maxResults": {"type": "integer", "minimum": 1, "maximum": 2000, "default": 500},
             "contextLines": {"type": "integer", "minimum": 0, "maximum": 10, "default": 2},
+            "beforeContextLines": {"type": "integer", "minimum": 0, "maximum": 10, "default": 2},
+            "afterContextLines": {"type": "integer", "minimum": 0, "maximum": 10, "default": 2},
         }, ["root", "query"]),
         "annotations": {"readOnlyHint": True, "openWorldHint": False},
         "_meta": {"openai/widgetAccessible": True},

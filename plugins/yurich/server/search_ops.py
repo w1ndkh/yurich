@@ -48,9 +48,11 @@ def _matches_patterns(relative: str, includes: list[str], excludes: list[str]) -
     return True
 
 
-def _context(lines: list[str], line_number: int, radius: int = 2) -> list[dict[str, Any]]:
-    start = max(1, line_number - radius)
-    end = min(len(lines), line_number + radius)
+def _context(
+    lines: list[str], line_number: int, before: int = 2, after: int = 2
+) -> list[dict[str, Any]]:
+    start = max(1, line_number - before)
+    end = min(len(lines), line_number + after)
     return [
         {"lineNumber": number, "text": lines[number - 1], "isMatch": number == line_number}
         for number in range(start, end + 1)
@@ -80,7 +82,8 @@ def _rg_search(
     includes: list[str],
     excludes: list[str],
     max_results: int,
-    context_lines: int,
+    before_context_lines: int,
+    after_context_lines: int,
 ) -> tuple[list[dict[str, Any]], bool] | None:
     rg = shutil.which("rg")
     if not rg:
@@ -152,7 +155,10 @@ def _rg_search(
             try:
                 if path not in line_cache:
                     line_cache[path] = read_utf8(path)[0].splitlines()
-                context = _context(line_cache[path], line_number, context_lines)
+                context = _context(
+                    line_cache[path], line_number,
+                    before_context_lines, after_context_lines,
+                )
             except YurichError:
                 context = [{"lineNumber": line_number, "text": line_text, "isMatch": True}]
             matches.append(
@@ -228,7 +234,8 @@ def _fallback_search(
     includes: list[str],
     excludes: list[str],
     max_results: int,
-    context_lines: int,
+    before_context_lines: int,
+    after_context_lines: int,
 ) -> tuple[list[dict[str, Any]], bool]:
     flags = 0 if case_sensitive else re.IGNORECASE
     expression = query if regex else re.escape(query)
@@ -261,7 +268,10 @@ def _fallback_search(
                     "column": found.start() + 1,
                     "endColumn": found.end() + 1,
                     "text": line,
-                    "context": _context(lines, line_number, context_lines),
+                    "context": _context(
+                        lines, line_number,
+                        before_context_lines, after_context_lines,
+                    ),
                 }
             )
             if len(matches) >= max_results:
@@ -277,8 +287,11 @@ def search_project(arguments: dict[str, Any]) -> dict[str, Any]:
         raise YurichError("Enter text to search for.")
     max_results = int(arguments.get("maxResults") or 500)
     max_results = max(1, min(max_results, 2000))
-    context_lines = int(arguments.get("contextLines", 2))
-    context_lines = max(0, min(context_lines, 10))
+    legacy_context = int(arguments.get("contextLines", 2))
+    before_context_lines = int(arguments.get("beforeContextLines", legacy_context))
+    after_context_lines = int(arguments.get("afterContextLines", legacy_context))
+    before_context_lines = max(0, min(before_context_lines, 10))
+    after_context_lines = max(0, min(after_context_lines, 10))
     options = {
         "case_sensitive": bool(arguments.get("caseSensitive", False)),
         "regex": bool(arguments.get("regex", False)),
@@ -286,7 +299,8 @@ def search_project(arguments: dict[str, Any]) -> dict[str, Any]:
         "includes": _patterns(arguments.get("includeGlobs")),
         "excludes": _patterns(arguments.get("excludeGlobs")),
         "max_results": max_results,
-        "context_lines": context_lines,
+        "before_context_lines": before_context_lines,
+        "after_context_lines": after_context_lines,
     }
     found = _rg_search(root, query, **options)
     if found is None:

@@ -18,7 +18,13 @@ STRING_LIMITS = {
     "gitDraft": 10000,
 }
 BOOL_KEYS = {"caseSensitive", "wholeWord", "regex", "terminalOpen"}
-INTEGER_LIMITS = {"fontSize": (11, 20), "contextLines": (0, 10), "terminalHeight": (150, 2000)}
+INTEGER_LIMITS = {
+    "fontSize": (11, 20),
+    "contextLines": (0, 10),
+    "beforeContextLines": (0, 10),
+    "afterContextLines": (0, 10),
+    "terminalHeight": (150, 2000),
+}
 ENUM_VALUES = {
     "theme": {"auto", "light", "dark"},
     "searchMode": {"content", "filename"},

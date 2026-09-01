@@ -53,9 +53,13 @@ button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--l
             <span>Font size</span><output id="fontSizeValue" class="setting-value">14 px</output>
             <input id="fontSize" type="range" min="11" max="20" step="1" value="14">
           </label>
-          <label class="setting-row" for="contextLines">
-            <span>Context lines</span><output id="contextLinesValue" class="setting-value">2</output>
-            <input id="contextLines" type="range" min="0" max="10" step="1" value="2">
+          <label class="setting-row" for="beforeContextLines">
+            <span>Lines above</span><output id="beforeContextLinesValue" class="setting-value">2</output>
+            <input id="beforeContextLines" type="range" min="0" max="10" step="1" value="2">
+          </label>
+          <label class="setting-row" for="afterContextLines">
+            <span>Lines below</span><output id="afterContextLinesValue" class="setting-value">2</output>
+            <input id="afterContextLines" type="range" min="0" max="10" step="1" value="2">
           </label>
           <label class="setting-row" for="theme">
             <span>Theme</span>
@@ -290,7 +294,8 @@ function stateSnapshot() {
     include:$("include").value,
     exclude:$("exclude").value,
     fontSize:Number($("fontSize").value),
-    contextLines:Number($("contextLines").value),
+    beforeContextLines:Number($("beforeContextLines").value),
+    afterContextLines:Number($("afterContextLines").value),
     theme:$("theme").value,
     searchMode:$("searchMode").value,
     searchHistory:state.searchHistory,
@@ -309,10 +314,13 @@ function applyFontSize(value) {
   document.documentElement.style.setProperty("--font-size", size + "px");
 }
 
-function applyContextLines(value) {
-  const count = Math.min(10, Math.max(0, Number(value) || 0));
-  $("contextLines").value = String(count);
-  $("contextLinesValue").value = String(count);
+function applyContextLines(beforeValue, afterValue = beforeValue) {
+  const before = Math.min(10, Math.max(0, Number(beforeValue) || 0));
+  const after = Math.min(10, Math.max(0, Number(afterValue) || 0));
+  $("beforeContextLines").value = String(before);
+  $("beforeContextLinesValue").value = String(before);
+  $("afterContextLines").value = String(after);
+  $("afterContextLinesValue").value = String(after);
 }
 
 function applyTheme(value) {
@@ -395,7 +403,11 @@ function restoreState(saved, autoSearch = false) {
   state.recentFolders = Array.isArray(saved.recentFolders) ? saved.recentFolders : [];
   state.favoriteFolders = Array.isArray(saved.favoriteFolders) ? saved.favoriteFolders : [];
   applyFontSize(saved.fontSize);
-  applyContextLines(saved.contextLines == null ? 2 : saved.contextLines);
+  const legacyContext = saved.contextLines == null ? 2 : saved.contextLines;
+  applyContextLines(
+    saved.beforeContextLines == null ? legacyContext : saved.beforeContextLines,
+    saved.afterContextLines == null ? legacyContext : saved.afterContextLines
+  );
   applyTheme(saved.theme);
   updateSearchMode(false);
   state.root = $("root").value;
@@ -599,7 +611,10 @@ async function search() {
       excludeGlobs:patterns($("exclude").value),
       maxResults:500
     };
-    if (mode === "content") searchArgs.contextLines = Number($("contextLines").value);
+    if (mode === "content") {
+      searchArgs.beforeContextLines = Number($("beforeContextLines").value);
+      searchArgs.afterContextLines = Number($("afterContextLines").value);
+    }
     const data = await rpcCall(mode === "filename" ? "search_files" : "search_project", searchArgs);
     renderResults(data);
     const noun = mode === "filename" ? "files" : "matches";
@@ -1274,10 +1289,10 @@ $("fontSize").addEventListener("input", () => {
   applyFontSize($("fontSize").value);
   persist();
 });
-$("contextLines").addEventListener("input", () => {
-  applyContextLines($("contextLines").value);
+["beforeContextLines","afterContextLines"].forEach(id => $(id).addEventListener("input", () => {
+  applyContextLines($("beforeContextLines").value, $("afterContextLines").value);
   persist();
-});
+}));
 $("theme").addEventListener("change", () => {
   applyTheme($("theme").value);
   persist();
@@ -1300,7 +1315,7 @@ window.addEventListener("beforeunload", event => {
 window.addEventListener("resize", () => applyTerminalHeight(state.terminal.height, false));
 
 applyFontSize(14);
-applyContextLines(2);
+applyContextLines(2, 2);
 applyTheme("auto");
 $("exclude").value = DEFAULT_EXCLUDES;
 refreshSavedChoices();

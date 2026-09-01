@@ -69,6 +69,14 @@ class FilesystemTests(unittest.TestCase):
         self.assertEqual(files["mode"], "files")
         self.assertEqual(files["files"], ["src/hello.py"])
 
+    def test_context_above_and_below_are_independent(self) -> None:
+        found = search_project({
+            "root": str(self.root), "query": "needle",
+            "beforeContextLines": 0, "afterContextLines": 1,
+        })
+        context = found["results"][0]["context"]
+        self.assertEqual([row["lineNumber"] for row in context], [2, 3])
+
     @unittest.skipUnless(os.name == "nt", "Notepad integration is Windows-only")
     def test_open_in_notepad_uses_safe_resolved_file(self) -> None:
         with mock.patch("filesystem_ops.subprocess.Popen") as popen:
@@ -157,7 +165,7 @@ class GitTests(unittest.TestCase):
 
 class McpTests(unittest.TestCase):
     def test_server_lists_tools_and_ui(self) -> None:
-        ui_uris = [f"ui://yurich/main-v{version}.html" for version in range(10, 0, -1)]
+        ui_uris = [f"ui://yurich/main-v{version}.html" for version in range(11, 0, -1)]
         requests = [
             {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-06-18"}},
             {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}},
@@ -189,13 +197,14 @@ class McpTests(unittest.TestCase):
             },
         )
         content = replies[2]["result"]["contents"][0]
-        self.assertEqual(content["uri"], "ui://yurich/main-v10.html")
+        self.assertEqual(content["uri"], "ui://yurich/main-v11.html")
         self.assertEqual(content["mimeType"], "text/html;profile=mcp-app")
         self.assertIn('method:"tools/call"', content["text"])
         self.assertIn('requestDisplayMode("fullscreen")', content["text"])
         self.assertIn('id="settings"', content["text"])
         self.assertIn('id="fontSize"', content["text"])
-        self.assertIn('id="contextLines"', content["text"])
+        self.assertIn('id="beforeContextLines"', content["text"])
+        self.assertIn('id="afterContextLines"', content["text"])
         self.assertIn('id="searchMode"', content["text"])
         self.assertIn('id="favoriteFolders"', content["text"])
         self.assertIn('id="findVariable"', content["text"])
@@ -235,6 +244,8 @@ class StateTests(unittest.TestCase):
                     "exclude": "*.min.css",
                     "fontSize": 17,
                     "contextLines": 4,
+                    "beforeContextLines": 3,
+                    "afterContextLines": 6,
                     "theme": "dark",
                     "searchMode": "filename",
                     "searchHistory": [".hero-text", "home.css"],

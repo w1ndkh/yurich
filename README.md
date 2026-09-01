@@ -30,8 +30,8 @@ not a bulk refactoring tool and it never edits search results automatically.
 - **File-name search** for locating a file by its name or relative path without
   searching its contents.
 - **Readable results** grouped by file, with separated context blocks,
-  highlighted matches, keyboard-style next/previous selection, and a
-  configurable number of nearby lines.
+  highlighted matches, keyboard-style next/previous selection, and separately
+  configurable line counts above and below each match.
 - **Inline editor** with line numbers, match navigation, tab insertion, reload,
   and `Ctrl+S` saving.
 - **Open in Notepad** from the right-click menu for any result or the currently
