@@ -752,9 +752,9 @@ async function openFileInNotepad(path) {
   }
 }
 
-async function reloadFile() {
+async function reloadFile(force = false) {
   if (!state.file) return;
-  if (!confirmDiscard("Discard unsaved edits and reload the file from disk?")) return;
+  if (!force && !confirmDiscard("Discard unsaved edits and reload the file from disk?")) return;
   setBusy(true); editorStatus("Reloading…", "", true);
   try {
     const data = await rpcCall("read_file", {root:state.root, path:state.file});
@@ -1245,7 +1245,7 @@ $("settings").onclick = () => {
 };
 $("back").onclick = backToResults;
 $("reload").onclick = reloadFile;
-$("conflictReload").onclick = reloadFile;
+$("conflictReload").onclick = () => reloadFile(true);
 $("save").onclick = saveFile;
 $("findVariable").onclick = findCssVariable;
 $("previousResult").onclick = () => moveResultSelection(-1);

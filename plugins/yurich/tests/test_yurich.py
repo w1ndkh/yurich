@@ -46,6 +46,18 @@ class FilesystemTests(unittest.TestCase):
         self.assertEqual(saved["status"], "success")
         self.assertIn("changed", (self.root / "src" / "hello.py").read_text(encoding="utf-8"))
 
+    def test_file_version_survives_json_round_trip(self) -> None:
+        opened = read_file({"root": str(self.root), "path": "src/hello.py"})
+        bridged = json.loads(json.dumps(opened))
+        self.assertIsInstance(bridged["metadata"]["mtimeNs"], str)
+        saved = save_file({
+            "root": str(self.root),
+            "path": "src/hello.py",
+            "content": bridged["content"].replace("needle", "round-trip"),
+            "expectedVersion": bridged["metadata"],
+        })
+        self.assertEqual(saved["status"], "success")
+
     def test_conflict_is_not_overwritten(self) -> None:
         opened = read_file({"root": str(self.root), "path": "src/hello.py"})
         (self.root / "src" / "hello.py").write_text("external\n", encoding="utf-8")
@@ -165,7 +177,7 @@ class GitTests(unittest.TestCase):
 
 class McpTests(unittest.TestCase):
     def test_server_lists_tools_and_ui(self) -> None:
-        ui_uris = [f"ui://yurich/main-v{version}.html" for version in range(14, 0, -1)]
+        ui_uris = [f"ui://yurich/main-v{version}.html" for version in range(15, 0, -1)]
         requests = [
             {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-06-18"}},
             {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}},
@@ -197,7 +209,7 @@ class McpTests(unittest.TestCase):
             },
         )
         content = replies[2]["result"]["contents"][0]
-        self.assertEqual(content["uri"], "ui://yurich/main-v14.html")
+        self.assertEqual(content["uri"], "ui://yurich/main-v15.html")
         self.assertEqual(content["mimeType"], "text/html;profile=mcp-app")
         self.assertIn('method:"tools/call"', content["text"])
         self.assertIn('requestDisplayMode("fullscreen")', content["text"])
@@ -210,6 +222,7 @@ class McpTests(unittest.TestCase):
         self.assertIn('id="favoriteStar"', content["text"])
         self.assertIn('class="folder-picker"', content["text"])
         self.assertIn('id="folderIndent"', content["text"])
+        self.assertIn('$("conflictReload").onclick = () => reloadFile(true);', content["text"])
         self.assertIn('id="findVariable"', content["text"])
         self.assertIn('id="terminalPanel"', content["text"])
         self.assertIn('id="terminalInput"', content["text"])

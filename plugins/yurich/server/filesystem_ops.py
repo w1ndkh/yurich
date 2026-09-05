@@ -102,7 +102,9 @@ def version_info(path: Path, raw: bytes | None = None) -> dict[str, Any]:
         raw = path.read_bytes()
     return {
         "size": stat.st_size,
-        "mtimeNs": stat.st_mtime_ns,
+        # JavaScript cannot represent Windows nanosecond timestamps exactly as
+        # numbers. Keep the value as a decimal string across the JSON bridge.
+        "mtimeNs": str(stat.st_mtime_ns),
         "sha256": hashlib.sha256(raw).hexdigest(),
     }
 
